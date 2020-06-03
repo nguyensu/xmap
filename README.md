@@ -7,6 +7,8 @@ XMAP steps include:
 * Topology Learning
 * Context Learning
 
+XMAP is an ongoing project and purely developed using Python.
+
 ## Preview
 
 ### Select Datasets

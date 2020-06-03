@@ -7,22 +7,31 @@ XMAP steps include:
 * Topology Learning
 * Context Learning
 
-# Preview
+## Preview
 
-# Select Datasets
+### Select Datasets
 <img src="https://github.com/nguyensu/xmap/blob/master/datamap/dash-xmap/assets/xmap1.gif"  width="600">
 
-# Descriptive Analytics
+### Descriptive Analytics
 <img src="https://github.com/nguyensu/xmap/blob/master/datamap/dash-xmap/assets/xmap2.gif"  width="600">
 
-# Data Mapping
+### Data Mapping
 <img src="https://github.com/nguyensu/xmap/blob/master/datamap/dash-xmap/assets/xmap3.gif"  width="600">
 
-# Topology Learning
+### Topology Learning
 <img src="https://github.com/nguyensu/xmap/blob/master/datamap/dash-xmap/assets/xmap4.gif"  width="600">
 
-# Context Extraction
+### Context Extraction
 <img src="https://github.com/nguyensu/xmap/blob/master/datamap/dash-xmap/assets/xmap5.gif"  width="600">
 
-# Explainable Prediction
+### Explainable Prediction
 <img src="https://github.com/nguyensu/xmap/blob/master/datamap/dash-xmap/assets/xmap6.gif"  width="600">
+
+## Requirements
+* dash, dash_core_components, dash_table, dash_html_components
+* sklearn
+* umap
+XMAP has been tested on window 10 and ubuntu, with anaconda python 3.6
+
+## Quick start
+run */datamap/dash-xmap/app.py*

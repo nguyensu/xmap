@@ -1,0 +1,69 @@
+	Load cleaned data from models/xmap_k15_ns5_s2_new_hribm_data.cleandata
+Learning UMAP ...
+	Load trained umap from models/xmap_k15_ns5_s2_new_hribm_data.unsupervised_umap
+Learning topological relations and Determining contexts ....
+	Load trained umap from models/xmap_k15_ns5_s2_new_hribm_data.unsupervised_soinn
+Explaining contexts ...
+Context #1
+	True Features
+	False Features
+		['EducationField_Human Resources', 'JobLevel_5', 'JobRole_Sales Representative', 'YearsAtCompany_0.0to6.24']
+	Numeric Features
+	--------------------
+Context #2
+	True Features
+	False Features
+		['JobLevel_5', 'JobRole_Manufacturing Director', 'JobRole_Research Director', 'JobRole_Research Scientist', 'YearsSinceLastPromotion_11.57to15.0']
+	Numeric Features
+	--------------------
+Context #3
+	True Features
+	False Features
+		['StockOptionLevel_1', 'YearsAtCompany_14.22to25.22', 'YearsAtCompany_25.22to40.0', 'YearsWithCurrManager_12.22to17.0', 'YearsWithCurrManager_8.5to12.22']
+	Numeric Features
+	--------------------
+Context #4
+	True Features
+	False Features
+		['Age_29.83to38.39', 'JobLevel_1', 'JobLevel_2', 'JobRole_Sales Representative', 'MonthlyIncome_1009.0to4331.13']
+	Numeric Features
+	--------------------
+Context #5
+	True Features
+	False Features
+		['EducationField_Marketing', 'JobRole_Sales Executive', 'MonthlyIncome_14378.19to19999.0', 'YearsAtCompany_25.22to40.0', 'YearsInCurrentRole_13.22to18.0']
+	Numeric Features
+	--------------------
+Context #6
+	True Features
+	False Features
+		['EducationField_Marketing', 'JobLevel_4', 'TotalWorkingYears_26.68to40.0', 'YearsInCurrentRole_13.22to18.0', 'YearsWithCurrManager_8.5to12.22']
+	Numeric Features
+	--------------------
+Context #7
+	True Features
+	False Features
+		['JobLevel_5', 'JobRole_Healthcare Representative', 'JobRole_Laboratory Technician', 'JobRole_Research Director', 'YearsWithCurrManager_12.22to17.0']
+	Numeric Features
+	--------------------
+Context #8
+	True Features
+	False Features
+		['JobRole_Manager', 'JobRole_Research Director', 'YearsAtCompany_14.22to25.22', 'YearsAtCompany_25.22to40.0', 'YearsWithCurrManager_12.22to17.0']
+	Numeric Features
+	--------------------
+Context #9
+	True Features
+		['JobLevel_1']
+	False Features
+		['JobLevel_5', 'JobRole_Healthcare Representative', 'MonthlyIncome_8303.29to14378.19', 'YearsWithCurrManager_12.22to17.0']
+	Numeric Features
+	--------------------
+Context #10
+	True Features
+	False Features
+		['WorkLifeBalance_4', 'YearsInCurrentRole_13.22to18.0', 'YearsInCurrentRole_9.19to13.22', 'YearsSinceLastPromotion_11.57to15.0', 'YearsSinceLastPromotion_7.56to11.57']
+	Numeric Features
+	--------------------
+	====================
+

@@ -1,0 +1,4 @@
+Ideas
+
+- Data set explainer:
+Example: this data set have ... features... and ... examples, with ... labels. There ... cluster and ...

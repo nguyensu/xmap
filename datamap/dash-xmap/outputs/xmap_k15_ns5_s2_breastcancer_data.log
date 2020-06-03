@@ -1,0 +1,29 @@
+	Load cleaned data from models/xmap_k15_ns5_s2_breastcancer_data.cleandata
+Learning UMAP ...
+	Load trained umap from models/xmap_k15_ns5_s2_breastcancer_data.unsupervised_umap
+Learning topological relations and Determining contexts ....
+	Load trained umap from models/xmap_k15_ns5_s2_breastcancer_data.unsupervised_soinn
+Explaining contexts ...
+Context #1
+	True Features
+	False Features
+	Numeric Features
+	--------------------
+Context #2
+	True Features
+		['BareNuclei']
+	False Features
+		['Mitoses']
+	Numeric Features
+	--------------------
+Context #3
+	True Features
+	False Features
+		['Mitoses']
+	Numeric Features
+	--------------------
+Context #4
+	True Features
+	False Features
+		['BareNuclei', 'ClumpThickness', 'MarginalAdhesion', 'Mitoses', 'NormalNucleoli', 'UniformityOfCellShape', 'UniformityOfCellSize']
+	Numeric Features

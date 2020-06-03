@@ -8,20 +8,5 @@ XMAP steps include:
 * Context Learning
 
 # Preview
-## Select datasets
-<img src="https://github.com/nguyensu/xmap/blob/master/datamap/dash-xmap/assets/xmap1.gif"  width="600">
 
-## Descriptive statistics
-<img src="https://github.com/nguyensu/xmap/blob/master/datamap/dash-xmap/assets/xmap2.gif"  width="600">
-
-## Data mapping
-<img src="https://github.com/nguyensu/xmap/blob/master/datamap/dash-xmap/assets/xmap3.gif"  width="600">
-
-## Topology Learning
-<img src="https://github.com/nguyensu/xmap/blob/master/datamap/dash-xmap/assets/xmap4.gif"  width="600">
-
-## Context extraction
-<img src="https://github.com/nguyensu/xmap/blob/master/datamap/dash-xmap/assets/xmap5.gif"  width="600">
-
-## Explainable Prediction
 <img src="https://github.com/nguyensu/xmap/blob/master/datamap/dash-xmap/assets/xmap6.gif"  width="600">

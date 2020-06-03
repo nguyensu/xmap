@@ -9,4 +9,20 @@ XMAP steps include:
 
 # Preview
 
+# Select Datasets
+<img src="https://github.com/nguyensu/xmap/blob/master/datamap/dash-xmap/assets/xmap1.gif"  width="600">
+
+# Descriptive Analytics
+<img src="https://github.com/nguyensu/xmap/blob/master/datamap/dash-xmap/assets/xmap2.gif"  width="600">
+
+# Data Mapping
+<img src="https://github.com/nguyensu/xmap/blob/master/datamap/dash-xmap/assets/xmap3.gif"  width="600">
+
+# Topology Learning
+<img src="https://github.com/nguyensu/xmap/blob/master/datamap/dash-xmap/assets/xmap4.gif"  width="600">
+
+# Context Extraction
+<img src="https://github.com/nguyensu/xmap/blob/master/datamap/dash-xmap/assets/xmap5.gif"  width="600">
+
+# Explainable Prediction
 <img src="https://github.com/nguyensu/xmap/blob/master/datamap/dash-xmap/assets/xmap6.gif"  width="600">

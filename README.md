@@ -33,6 +33,7 @@ XMAP is an ongoing project and purely developed using Python.
 * dash, dash_core_components, dash_table, dash_html_components
 * sklearn
 * umap
+
 XMAP has been tested on window 10 and ubuntu, with anaconda python 3.6
 
 ## Quick start

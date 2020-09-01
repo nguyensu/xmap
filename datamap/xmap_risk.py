@@ -6,7 +6,7 @@ import umap
 import matplotlib.pyplot as plt
 import warnings
 import numpy as np
-from soms.soinn.python import fast_soinn
+from topolearning.algorithm.python import atl
 from sklearn.neighbors import NearestNeighbors
 import networkx as nx
 from scipy.spatial import ConvexHull
@@ -162,7 +162,7 @@ def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=Non
         lamb = 500
         # if data.shape[0] < lamb:
         #     lamb = data.shape[0]
-        nodes, connection, classes = fast_soinn.learning(input_data=embedding, max_nepoch=5, spread_factor=1.0, lamb=lamb)
+        nodes, connection, classes = atl.learning(input_data=embedding, max_nepoch=5, spread_factor=1.0, lamb=lamb)
 
         classes = 0*classes
         cmap = cmap*10
@@ -223,10 +223,10 @@ def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=Non
         nclusters = len(components)
         step = STEP.SOINN_CLEANED
         pickle.dump(step, open(pathname + ".notes", "wb"))
-        pickle.dump((nodes, connection, classes, nclusters), open(pathname + ".soinn", "wb"))
+        pickle.dump((nodes, connection, classes, nclusters), open(pathname + ".algorithm", "wb"))
     else:
-        print_output("\tLoad trained umap from " + pathname + ".soinn")
-        nodes, connection, classes, nclusters = pickle.load(open(pathname + ".soinn", "rb"))
+        print_output("\tLoad trained umap from " + pathname + ".algorithm")
+        nodes, connection, classes, nclusters = pickle.load(open(pathname + ".algorithm", "rb"))
     # classes = [cid[c] for c in classes]
     cid = [c for c in range(nclusters+1)]
     cid = cid + [100]

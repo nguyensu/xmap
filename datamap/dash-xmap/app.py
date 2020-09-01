@@ -15,6 +15,9 @@ from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import KFold
 from sklearn.model_selection import StratifiedKFold
 
+NN = 30
+NS = 5
+
 datasets = ["new_german_data", "new_heart_data", "new_churn_data", "new_icu_data", "new_hribm_data", "bank_data", "new_spambase_data", "mushroom_data", "new_breastcancer_data", "adult_data",
                 "australian_data", "mammo_data"]
 datasets_labels = ["German Credit Risk", "Heart Disease", "Customer Churn", "ICU", "HR-IBM", "Bank", "Spambase", "Mushroom", "Breast Cancer", "Adult",
@@ -60,7 +63,7 @@ def display_page(pathname):
     elif pathname == "/dash-xmap/statistics":
         return statistics.create_layout(app, parameter_dict)
     elif pathname == "/dash-xmap/map":
-        parameter_dict["map"] = run_xmap(dataset=parameter_dict["dataname"], n_neighbors=15, negative_sample_rate=5,
+        parameter_dict["map"] = run_xmap(dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS,
                                          seed=2,
                                          return_step=STEP.UMAP_TRAINED)
         return map.create_layout(app, parameter_dict)
@@ -85,8 +88,8 @@ def display_page(pathname):
 
 def init_topo():
     embeddings, nodes, connection, classes, nclusters, node_indices, indices = run_xmap(
-        dataset=parameter_dict["dataname"], n_neighbors=15, negative_sample_rate=5, seed=2,
-        return_step=STEP.SOINN_TRAINED)
+        dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS, seed=2,
+        return_step=STEP.ATL_TRAINED)
     parameter_dict["map"] = embeddings
     parameter_dict["network_nodes"] = nodes
     parameter_dict["network_connection"] = connection
@@ -98,7 +101,7 @@ def init_topo():
 
 def assign_parameters():
     embeddings, nodes, connection, classes, nclusters, node_indices, indices, cluster_explainer_dict, xcluster_id_details, xfeaturenames \
-        = run_xmap(dataset=parameter_dict["dataname"], n_neighbors=15, negative_sample_rate=5, seed=2,
+        = run_xmap(dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS, seed=2,
                    return_step=STEP.CONTEXT_EXPLAINED)
     parameter_dict["map"] = embeddings
     parameter_dict["network_nodes"] = nodes
@@ -124,7 +127,7 @@ def assign_parameters():
 # @app.callback([], [Input('dataset-dropdown', 'value')])
 def update_output(value):
     if "dataname" not in parameter_dict or parameter_dict["dataname"] != value:
-        X_norm, Y, scaler, nfeatures, feature_names, target_name = run_xmap(dataset=value, n_neighbors=15, negative_sample_rate=5, seed=2, return_step=STEP.DATA_CLEANED)
+        X_norm, Y, scaler, nfeatures, feature_names, target_name = run_xmap(dataset=value, n_neighbors=NN, negative_sample_rate=NS, seed=2, return_step=STEP.DATA_CLEANED)
         feature_names_display = [ff.replace("ubar", "_").replace("dot", ".") for ff in feature_names]
         data = pd.DataFrame(np.concatenate((Y, X_norm), axis=1), columns=[target_name] + feature_names_display)
         parameter_dict["data"] = data
@@ -230,10 +233,10 @@ def update_figure_feature_corr(value):
 )
 def update_map(size, opacity, mapmode):
     if mapmode == "Unsupervised":
-        parameter_dict["map"] = run_xmap(dataset=parameter_dict["dataname"], n_neighbors=15, negative_sample_rate=5, seed=2,
+        parameter_dict["map"] = run_xmap(dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS, seed=2,
                                          return_step=STEP.UMAP_TRAINED)
     else:
-        parameter_dict["map"] = run_xmap(dataset=parameter_dict["dataname"], n_neighbors=15, negative_sample_rate=5,
+        parameter_dict["map"] = run_xmap(dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS,
                                          seed=2, return_step=STEP.UMAP_TRAINED, learn_mode=LEARN.SUPERVISED)
 
     labels = parameter_dict["data"][parameter_dict["target_name"]].values
@@ -644,21 +647,21 @@ def reload_data_objects(mapmode, plottype):
     if plottype == "Context":
         if mapmode == "Unsupervised":
             embeddings, nodes, connection, classes, nclusters, node_indices, indices, cluster_explainer_dict, xcluster_id_details, xfeaturenames \
-                = run_xmap(dataset=parameter_dict["dataname"], n_neighbors=15, negative_sample_rate=5, seed=2,
+                = run_xmap(dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS, seed=2,
                            return_step=STEP.CONTEXT_EXPLAINED)
         else:
             embeddings, nodes, connection, classes, nclusters, node_indices, indices, cluster_explainer_dict, xcluster_id_details, xfeaturenames \
-                = run_xmap(dataset=parameter_dict["dataname"], n_neighbors=15, negative_sample_rate=5,
+                = run_xmap(dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS,
                            seed=2, return_step=STEP.CONTEXT_EXPLAINED, learn_mode=LEARN.SUPERVISED)
     else:
         if mapmode == "Unsupervised":
             embeddings, nodes, connection, classes, nclusters, node_indices, indices = \
-                run_xmap(dataset=parameter_dict["dataname"], n_neighbors=15, negative_sample_rate=5, seed=2,
-                         return_step=STEP.SOINN_TRAINED)
+                run_xmap(dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS, seed=2,
+                         return_step=STEP.ATL_TRAINED)
         else:
             embeddings, nodes, connection, classes, nclusters, node_indices, indices = \
-                run_xmap(dataset=parameter_dict["dataname"], n_neighbors=15, negative_sample_rate=5,
-                         seed=2, return_step=STEP.SOINN_TRAINED, learn_mode=LEARN.SUPERVISED)
+                run_xmap(dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS,
+                         seed=2, return_step=STEP.ATL_TRAINED, learn_mode=LEARN.SUPERVISED)
     parameter_dict["map"] = embeddings
     parameter_dict["network_nodes"] = nodes
     parameter_dict["network_connection"] = connection
@@ -909,6 +912,9 @@ def runml(click, context, learnmode, mlalg, p1, p2, datmode):
             nameclf = "{}_SKrules_{}_{}_fold_{}".format(parameter_dict["dataname"], p1, p2, nfold)
         # display_clf = "Logistic Regression with C={} and Tolerance={}".format(p1,p2)
         if nameclf not in parameter_dict:
+            import six
+            import sys
+            sys.modules['sklearn.externals.six'] = six
             from skrules import SkopeRules
             X, Y, fnames = setup_training_set(mlalg, nameclf)
             clf = SkopeRules(n_estimators=p2, max_depth=p1, #precision_min=0.95,

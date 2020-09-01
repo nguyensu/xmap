@@ -1,1 +1,82 @@
 	Load cleaned data from models/xmap_k15_ns5_s2_australian_data.cleandata
+Learning UMAP ...
+	Load trained umap from models/xmap_k15_ns5_s2_australian_data.unsupervised_umap
+Learning topological relations and Determining contexts ....
+	Load trained umap from models/xmap_k15_ns5_s2_australian_data.unsupervised_soinn
+Explaining contexts ...
+Context #1
+	True Features
+		['A10_5.319417651314217_24.97413793103449', 'A14_7244.760931861606_32293.607142857145']
+	False Features
+		['A1', 'A14_1.0_7244.760931861606', 'A5_12']
+	Numeric Features
+	--------------------
+Context #2
+	True Features
+		['A4_2']
+	False Features
+		['A13_0.0_211.09069366435023', 'A13_530.8976958525344_1366.4', 'A14_1.0_7244.760931861606', 'A4_1']
+	Numeric Features
+	--------------------
+Context #3
+	True Features
+		['A10_5.319417651314217_24.97413793103449', 'A14_7244.760931861606_32293.607142857145', 'A4_1']
+	False Features
+		['A14_75276.0_100001.0', 'A6_9']
+	Numeric Features
+	--------------------
+Context #4
+	True Features
+		['A10_5.319417651314217_24.97413793103449']
+	False Features
+		['A1', 'A10_24.97413793103449_53.5', 'A10_53.5_67.0', 'A13_0.0_211.09069366435023']
+	Numeric Features
+	--------------------
+Context #5
+	True Features
+		['A10_5.319417651314217_24.97413793103449']
+	False Features
+		['A1', 'A10_24.97413793103449_53.5', 'A10_53.5_67.0', 'A13_0.0_211.09069366435023']
+	Numeric Features
+	--------------------
+Context #6
+	True Features
+	False Features
+		['A10_53.5_67.0', 'A13_1366.4_2000.0', 'A14_1.0_7244.760931861606', 'A14_32293.607142857145_75276.0', 'A14_75276.0_100001.0']
+	Numeric Features
+	--------------------
+Context #7
+	True Features
+		['A12_2', 'A13_211.09069366435023_530.8976958525344', 'A14_7244.760931861606_32293.607142857145', 'A8', 'A9']
+	False Features
+	Numeric Features
+	--------------------
+Context #8
+	True Features
+		['A12_2', 'A8']
+	False Features
+		['A1', 'A10_0.0_5.319417651314217', 'A12_3']
+	Numeric Features
+	--------------------
+Context #9
+	True Features
+		['A12_2', 'A13_530.8976958525344_1366.4', 'A2_26.78210022831052_37.92966133942162']
+	False Features
+		['A1', 'A12_3']
+	Numeric Features
+	--------------------
+Context #10
+	True Features
+	False Features
+		['A1', 'A10_53.5_67.0', 'A5_12', 'A6_1', 'A6_9']
+	Numeric Features
+	--------------------
+Context #11
+	True Features
+		['A6_1']
+	False Features
+		['A1', 'A10_0.0_5.319417651314217', 'A13_0.0_211.09069366435023', 'A7_21.398299999999995_28.5']
+	Numeric Features
+	--------------------
+	====================
+

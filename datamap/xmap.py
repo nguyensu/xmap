@@ -1,4 +1,10 @@
-# data mapping and analytics platform (DataMAP)
+"""
+Author: Su Nguyen,
+Centre for Data Analytics and Cognition (CDAC), La Trobe University
+
+This file contain core algorithms for XMAP.
+"""
+# This file contains core algorithms for XMAP
 import pandas as pd
 import time
 import os.path
@@ -6,7 +12,7 @@ import umap
 import matplotlib.pyplot as plt
 import warnings
 import numpy as np
-from soms.soinn.python import fast_soinn
+from topolearning.algorithm.python import atl
 from sklearn.neighbors import NearestNeighbors
 import networkx as nx
 from scipy.spatial import ConvexHull
@@ -18,20 +24,32 @@ from sklearn.decomposition import PCA
 
 warnings.simplefilter('ignore')
 
+"""
+Key parameters for XMAP
+"""
 NNK, NS, SEED, f, cmap, NFEATURE = None, None, None, None, None, None
 
+"""
+define analytical steps in XMAP
+"""
 class STEP(Enum):
     INITIALIZING = 0
     DATA_CLEANED = 1
     UMAP_TRAINED = 2
-    SOINN_TRAINED = 3
+    ATL_TRAINED = 3
     CONTEXT_EXPLAINED = 4
 
+"""
+define learning settings
+"""
 class LEARN(Enum):
     UNSUPERVISED = 0
     SUPERVISED = 1
 
-def plot_soinn(nodes, connection):
+"""
+plotting ATL outputs using matplotlib
+"""
+def plot_atl(nodes, connection):
     plt.tight_layout()
     plt.plot(nodes[:, 0], nodes[:, 1], 'ro')
     for i in range(0, nodes.shape[0]):
@@ -47,6 +65,9 @@ def print_output(*argv, ee="\n"):
     print(argv[0], end=ee, file=f)
     f.flush()
 
+"""
+plotting umap outputs using matplotlib. Using convex hull to visualise clusters.
+"""
 def plot_embedding_space(embedding, labels=None, label_index=None, lnames=None, data_name=""):
     plt.rc('legend', **{'fontsize': 15})
     plt.figure(figsize=(14, 14))
@@ -76,9 +97,6 @@ def plot_embedding_space(embedding, labels=None, label_index=None, lnames=None, 
                              lnames[li].split()[1], fontsize=30, fontweight="bold",
                              bbox={'facecolor': cmap[li], 'alpha': 0.5, 'edgecolor': 'none', 'boxstyle': 'round'},
                              color="white", alpha=0.7)
-                # plt.fill(points[hull.simplices, 0], points[hull.simplices, 1], color=cmap[li], alpha=0.3)
-                # plt.text(0.5*(np.max(points[hull.simplices, 0]) + np.min(points[hull.simplices, 0])),
-                #          0.5*(np.max(points[hull.simplices, 1]) + np.min(points[hull.simplices, 1])),
                 cname += " Area=" + str(np.round(area, 2)) + " Denst=" + str(density)
             plt.scatter(
                 points[::, 0], points[::, 1], c=cmap[li],
@@ -95,6 +113,9 @@ def plot_embedding_space(embedding, labels=None, label_index=None, lnames=None, 
     plt.show()
     return sizes
 
+"""
+main XMAP algorithms
+"""
 def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=None, model_folder="models",
              return_step=STEP.DATA_CLEANED, learn_mode = LEARN.UNSUPERVISED, runall= False):
     global f, SEED, NNK, NS, cmap, NFEATURE
@@ -109,7 +130,9 @@ def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=Non
     current_step = STEP.INITIALIZING
     t0 = time.time()
 
-
+    """
+    STEP 1: Loading the dataset
+    """
     if runall or not os.path.exists(pathname + ".cleandata"):
         f = open("outputs/xmap_k{}_ns{}_s{}_".format(NNK, NS, SEED) + dataset + ".log", 'w')
         print_output("Loading Data ...")
@@ -122,7 +145,7 @@ def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=Non
         data = data.values
         Y = data[:, 0].reshape(-1, 1)
         X = data[:, 1:]
-
+        # scale the dataset
         scaler = MinMaxScaler()
         scaler.fit(X)
         X_norm = scaler.transform(X)
@@ -137,7 +160,9 @@ def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=Non
     if current_step == return_step:
         return X_norm, Y, scaler, nfeatures, feature_names, target_name
 
-
+    """
+    STEP 2: Learn the latent representation of the dataset (unsupervised or supervised)
+    """
     print_output("Learning UMAP ...")
     print(learn_mode)
     if learn_mode == LEARN.UNSUPERVISED:
@@ -170,11 +195,13 @@ def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=Non
     if return_step == None:
         plot_embedding_space(embedding, labels=Y, label_index=[0, 1], lnames=lnames, data_name="gt_"+dataset)
 
-
-    # nepoch: number of times the data passed to SOINN; age_max: maximum age of a connection; age increases if the
+    """
+    STEP 3: summarise latent data using ATL and cluster data using learned graph from ATL
+    """
+    # nepoch: number of times the data passed to ATL; age_max: maximum age of a connection; age increases if the
     # connection (different from the second best) links to the BMU. If max_age is too small the topological relationships will
     # be prematurely destroyed. Meanwhile if max_age is too large, some useless connections may survive because of randomness
-    # or noise --> SOINN needs to run longer to get the accurate results and more relationships will be preserved.
+    # or noise --> ATL needs to run longer to get the accurate results and more relationships will be preserved.
     # lamb: is the number of steps (or number of processed inputs) before SOINN checks and cleans up the network. Lambda has
     # a similar effect as compared to max_age, i.e. small lamb leads to unstable network (unable to establish topological
     # relationhips) while large lamb may lead to redundant nodes and connections.
@@ -187,12 +214,12 @@ def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=Non
         lamb = 200
         # if data.shape[0] < lamb:
         #     lamb = data.shape[0]
-        nodes, connection, classes = fast_soinn.learning(input_data=embedding, max_nepoch=5, spread_factor=1.0, lamb=lamb)
+        nodes, connection, classes = atl.learning(input_data=embedding, max_nepoch=5, spread_factor=1.0, lamb=lamb)
 
         classes = 0*classes
         cmap = cmap*10
         if return_step == None:
-            plot_soinn(nodes, connection)
+            plot_atl(nodes, connection)
 
         G = nx.Graph()
         for i in range(0, nodes.shape[0]):
@@ -207,8 +234,6 @@ def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=Non
         if network_cd_alg == "gn":
             from networkx.algorithms import community
             communities_generator = community.girvan_newman(G)
-            # for _ in range(max(max_context - n_components, 0)):
-            #     level_communities = next(communities_generator)
             while True:
                 level_communities = next(communities_generator)
                 size_com = [len(c) for c in level_communities if len(c) > 1]
@@ -251,14 +276,18 @@ def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=Non
         distances, indices = nbrs.kneighbors(embedding)
         node_indices = list(indices.reshape(-1))
         indices = np.array([classes[node_indices[i]] for i in range(len(node_indices))])
-        last_step = STEP.SOINN_TRAINED
+        last_step = STEP.ATL_TRAINED
         pickle.dump((nodes, connection, classes, nclusters, node_indices, indices), open(pathname + soinnname, "wb"))
     else:
         print_output("\tLoad trained umap from " + pathname + soinnname)
         nodes, connection, classes, nclusters, node_indices, indices = pickle.load(open(pathname + soinnname, "rb"))
-    current_step = STEP.SOINN_TRAINED
+    current_step = STEP.ATL_TRAINED
     if current_step == return_step:
         return embedding, nodes, connection, classes, nclusters, node_indices, indices
+    """
+    STEP 4: Try to explain context/cluster using Context Description Approximation (CDA). Can work with original 
+    features or interactive terms (representing or/and relations).
+    """
     # classes = [cid[c] for c in classes]
     cid = [c for c in range(nclusters+1)]
     cid = cid + [100]
@@ -380,13 +409,8 @@ def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=Non
                     count += 1
                 if count > 0:
                     print_output("\t\t" + str([(feature_names[ii[0]], ii[1], ii[2]) for ii in numeric_features[:count]]))
-                # xcluster_id = mask*(cluster_id+1)
-                # xcluster_id = np.where(xcluster_id == 0,
-                #                        mask*(cluster_id+1),
-                #                        np.where(mask != 0, 100, xcluster_id))
                 xcluster_id_details[mask, cluster_id] = 1
                 print_output("\t" + 20 * '-')
-                # print_output("# Zeros Std. = {}".format(nzeros))
             print_output("\t" + 20 * '=')
             print_output("")
 
@@ -399,10 +423,6 @@ def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=Non
     current_step = STEP.CONTEXT_EXPLAINED
     if current_step == return_step:
         return embedding, nodes, connection, classes, nclusters, node_indices, indices, cluster_explainer_dict, xcluster_id_details, feature_names
-    # for i in range(nclusters):
-    #     plot_embedding_space(embedding, labels=xcluster_id_details[::, i], label_index=cid,
-    #                          lnames=["xcontext__# " + str(c) for c in cid],
-    #                          data_name="highlightXcontext_" + str(i + 1) + "   __" + dataset)
 
     run_time = time.time() - t0
     print_output('Run in %.3f s' % run_time)

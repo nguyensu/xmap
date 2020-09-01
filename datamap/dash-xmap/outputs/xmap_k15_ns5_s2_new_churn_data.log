@@ -1,1 +1,135 @@
 	Load cleaned data from models/xmap_k15_ns5_s2_new_churn_data.cleandata
+Learning UMAP ...
+	Load trained umap from models/xmap_k15_ns5_s2_new_churn_data.unsupervised_umap
+Learning topological relations and Determining contexts ....
+	Load trained umap from models/xmap_k15_ns5_s2_new_churn_data.unsupervised_soinn
+Explaining contexts ...
+Context #1
+	True Features
+		['InternetService_Fiber optic', 'MonthlyCharges_88.65to118.75', 'PhoneService', 'TotalCharges_5471.41to8684.8']
+	False Features
+		['StreamingTV_No internet service']
+	Numeric Features
+	--------------------
+Context #2
+	True Features
+		['InternetService_Fiber optic', 'MonthlyCharges_88.65to118.75', 'PhoneService']
+	False Features
+		['StreamingMovies_No internet service', 'StreamingTV_No internet service']
+	Numeric Features
+	--------------------
+Context #3
+	True Features
+		['InternetService_Fiber optic', 'MonthlyCharges_88.65to118.75', 'PhoneService']
+	False Features
+		['OnlineBackup_No internet service', 'StreamingTV_No internet service']
+	Numeric Features
+	--------------------
+Context #4
+	True Features
+		['DeviceProtection_No internet service', 'OnlineBackup_No internet service', 'StreamingMovies_No internet service', 'StreamingTV_No internet service', 'TechSupport_No internet service']
+	False Features
+	Numeric Features
+	--------------------
+Context #5
+	True Features
+		['InternetService_DSL', 'PhoneService']
+	False Features
+		['OnlineBackup_No internet service', 'StreamingMovies_No internet service', 'StreamingTV_No internet service']
+	Numeric Features
+	--------------------
+Context #6
+	True Features
+		['InternetService_Fiber optic', 'MonthlyCharges_64.95to88.65', 'PhoneService', 'TotalCharges_1218.93to3122.23']
+	False Features
+		['StreamingTV_No internet service']
+	Numeric Features
+	--------------------
+Context #7
+	True Features
+		['InternetService_DSL', 'MultipleLines_No phone service']
+	False Features
+		['DeviceProtection_No internet service', 'MonthlyCharges_88.65to118.75', 'StreamingTV_No internet service']
+	Numeric Features
+	--------------------
+Context #8
+	True Features
+		['Contract_One year', 'DeviceProtection_No internet service', 'StreamingMovies_No internet service', 'StreamingTV_No internet service', 'TechSupport_No internet service']
+	False Features
+	Numeric Features
+	--------------------
+Context #9
+	True Features
+		['InternetService_Fiber optic', 'MonthlyCharges_88.65to118.75', 'PhoneService', 'tenure_1.0to16.07']
+	False Features
+		['StreamingTV_No internet service']
+	Numeric Features
+	--------------------
+Context #10
+	True Features
+		['InternetService_DSL', 'MonthlyCharges_18.25to37.52', 'MultipleLines_No phone service']
+	False Features
+		['StreamingMovies_No internet service', 'StreamingTV_No internet service']
+	Numeric Features
+	--------------------
+Context #11
+	True Features
+		['InternetService_Fiber optic', 'MonthlyCharges_88.65to118.75', 'PhoneService']
+	False Features
+		['StreamingTV_No internet service', 'TotalCharges_5471.41to8684.8']
+	Numeric Features
+	--------------------
+Context #12
+	True Features
+		['InternetService_DSL', 'MonthlyCharges_37.52to64.95', 'PhoneService', 'TotalCharges_18.8to1218.93']
+	False Features
+		['StreamingTV_No internet service']
+	Numeric Features
+	--------------------
+Context #13
+	True Features
+		['InternetService_Fiber optic', 'MonthlyCharges_64.95to88.65', 'PhoneService']
+	False Features
+		['MonthlyCharges_88.65to118.75', 'StreamingTV_No internet service']
+	Numeric Features
+	--------------------
+Context #14
+	True Features
+		['Contract_Month-to-month', 'MonthlyCharges_64.95to88.65', 'PhoneService', 'tenure_1.0to16.07']
+	False Features
+		['StreamingTV_No internet service']
+	Numeric Features
+	--------------------
+Context #15
+	True Features
+		['DeviceProtection_No internet service', 'OnlineBackup_No internet service', 'StreamingMovies_No internet service', 'StreamingTV_No internet service', 'TechSupport_No internet service']
+	False Features
+	Numeric Features
+	--------------------
+Context #16
+	True Features
+		['MonthlyCharges_18.25to37.52', 'StreamingMovies_No internet service', 'StreamingTV_No internet service', 'TechSupport_No internet service', 'TotalCharges_1218.93to3122.23']
+	False Features
+	Numeric Features
+	--------------------
+Context #17
+	True Features
+		['Contract_Month-to-month', 'MonthlyCharges_64.95to88.65', 'PaymentMethod_Electronic check', 'StreamingMovies_No', 'tenure_1.0to16.07']
+	False Features
+	Numeric Features
+	--------------------
+Context #18
+	True Features
+		['InternetService_DSL', 'PhoneService']
+	False Features
+		['DeviceProtection_No internet service', 'StreamingMovies_No internet service', 'StreamingTV_No internet service']
+	Numeric Features
+	--------------------
+Context #19
+	True Features
+		['MonthlyCharges_37.52to64.95', 'OnlineSecurity_No', 'PaymentMethod_Electronic check', 'StreamingTV_No', 'TotalCharges_18.8to1218.93']
+	False Features
+	Numeric Features
+	--------------------
+	====================
+

@@ -20,8 +20,6 @@ datasets = ["new_german_data", "new_heart_data", "new_churn_data", "new_icu_data
 datasets_labels = ["German Credit Risk", "Heart Disease", "Customer Churn", "ICU", "HR-IBM", "Bank", "Spambase", "Mushroom", "Breast Cancer", "Adult",
                 "Australian Credit Risk", "Mammo"]
 
-# plotsize = 700
-
 dataset_dict = {datasets[i]: datasets_labels[i] for i in range(len(datasets))}
 
 app = dash.Dash(
@@ -623,7 +621,7 @@ def update_context_dropdown(plottype, mapmode):
                                 id='context-dropdown',
                                 options=[
                                     {'label': "Context #" + str(i+1), 'value': i}
-                                    for i in parameter_dict["explain_dict"]
+                                        for i in parameter_dict["explain_dict"]
                                 ],
                                 value=0,
                                 # labelStyle={'display': 'inline-block'}

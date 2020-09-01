@@ -1,1 +1,62 @@
 	Load cleaned data from models/xmap_k15_ns5_s2_new_german_data.cleandata
+Learning UMAP ...
+	Load trained umap from models/xmap_k15_ns5_s2_new_german_data.unsupervised_umap
+Learning topological relations and Determining contexts ....
+	Load trained umap from models/xmap_k15_ns5_s2_new_german_data.unsupervised_soinn
+Explaining contexts ...
+Context #1
+	True Features
+	False Features
+		['credit_amount_9876.15to18424.0', 'housing_free', 'number_existing_credits_this_bank_2.5to3.5', 'number_existing_credits_this_bank_3.5to4.0', 'purpose_others']
+	Numeric Features
+	--------------------
+Context #2
+	True Features
+	False Features
+		['housing_free', 'not_foreign', 'purpose_domestic_appliances', 'purpose_retraining', 'saving_gt_1000']
+	Numeric Features
+	--------------------
+Context #3
+	True Features
+	False Features
+		['credit_amount_9876.15to18424.0', 'duration_53.05to72.0', 'housing_free', 'purpose_domestic_appliances', 'purpose_others']
+	Numeric Features
+	--------------------
+Context #4
+	True Features
+	False Features
+		['all_credits_paid_back_duly', 'credit_amount_9876.15to18424.0', 'duration_53.05to72.0', 'housing_free', 'number_existing_credits_this_bank_3.5to4.0']
+	Numeric Features
+	--------------------
+Context #5
+	True Features
+	False Features
+		['duration_53.05to72.0', 'number_existing_credits_this_bank_3.5to4.0', 'purpose_repairs', 'purpose_retraining', 'unemployed_unskilled_nonresident']
+	Numeric Features
+	--------------------
+Context #6
+	True Features
+	False Features
+		['housing_free', 'number_existing_credits_this_bank_2.5to3.5', 'number_existing_credits_this_bank_3.5to4.0', 'number_liable_people_with2.0_not1.0', 'purpose_retraining']
+	Numeric Features
+	--------------------
+Context #7
+	True Features
+	False Features
+		['housing_free', 'not_foreign', 'purpose_domestic_appliances', 'purpose_retraining', 'unemployed_unskilled_nonresident']
+	Numeric Features
+	--------------------
+Context #8
+	True Features
+	False Features
+		['not_foreign', 'number_existing_credits_this_bank_3.5to4.0', 'property_real', 'purpose_domestic_appliances', 'purpose_retraining']
+	Numeric Features
+	--------------------
+Context #9
+	True Features
+	False Features
+		['credit_amount_9876.15to18424.0', 'duration_53.05to72.0', 'housing_free', 'number_existing_credits_this_bank_2.5to3.5', 'purpose_others']
+	Numeric Features
+	--------------------
+	====================
+

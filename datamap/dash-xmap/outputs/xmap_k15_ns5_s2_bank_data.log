@@ -1,1 +1,3 @@
 	Load cleaned data from models/xmap_k15_ns5_s2_bank_data.cleandata
+Learning UMAP ...
+	Load trained umap from models/xmap_k15_ns5_s2_bank_data.unsupervised_umap

@@ -1,1 +1,91 @@
 	Load cleaned data from models/xmap_k15_ns5_s2_new_icu_data.cleandata
+Learning UMAP ...
+	Load trained umap from models/xmap_k15_ns5_s2_new_icu_data.unsupervised_umap
+Learning topological relations and Determining contexts ....
+	Load trained umap from models/xmap_k15_ns5_s2_new_icu_data.unsupervised_soinn
+Explaining contexts ...
+Context #1
+	True Features
+	False Features
+		['hosp_los_63.44to206.43', 'icu_los_34.33to101.74', 'lods_12.18to20.0', 'sofa_13.06to21.0', 'weight_616.25to710.0']
+	Numeric Features
+	--------------------
+Context #2
+	True Features
+	False Features
+		['hosp_los_63.44to206.43', 'icu_los_34.33to101.74', 'lods_12.18to20.0', 'septic_shock_explicit', 'weight_616.25to710.0']
+	Numeric Features
+	--------------------
+Context #3
+	True Features
+	False Features
+		['icu_los_34.33to101.74', 'lods_12.18to20.0', 'sofa_13.06to21.0', 'weight_325.21to616.25', 'weight_616.25to710.0']
+	Numeric Features
+	--------------------
+Context #4
+	True Features
+	False Features
+		['sepsis_explicit', 'septic_shock_explicit', 'severe_sepsis_explicit', 'weight_325.21to616.25', 'weight_616.25to710.0']
+	Numeric Features
+	--------------------
+Context #5
+	True Features
+	False Features
+		['lods_12.18to20.0', 'septic_shock_explicit', 'sofa_13.06to21.0', 'weight_325.21to616.25', 'weight_616.25to710.0']
+	Numeric Features
+	--------------------
+Context #6
+	True Features
+		['weight_1.0to88.99']
+	False Features
+		['hosp_los_63.44to206.43', 'icu_los_14.21to34.33', 'icu_los_34.33to101.74', 'septic_shock_explicit']
+	Numeric Features
+	--------------------
+Context #7
+	True Features
+	False Features
+		['sepsis_explicit', 'septic_shock_explicit', 'severe_sepsis_explicit', 'weight_325.21to616.25', 'weight_616.25to710.0']
+	Numeric Features
+	--------------------
+Context #8
+	True Features
+	False Features
+		['hosp_los_63.44to206.43', 'icu_los_14.21to34.33', 'icu_los_34.33to101.74', 'septic_shock_explicit', 'weight_616.25to710.0']
+	Numeric Features
+	--------------------
+Context #9
+	True Features
+		['weight_1.0to88.99']
+	False Features
+		['sepsis_explicit', 'septic_shock_explicit', 'weight_325.21to616.25', 'weight_616.25to710.0']
+	Numeric Features
+	--------------------
+Context #10
+	True Features
+		['sepsis_angus', 'sepsis_explicit', 'sepsis_martin']
+	False Features
+		['weight_325.21to616.25', 'weight_616.25to710.0']
+	Numeric Features
+	--------------------
+Context #11
+	True Features
+		['sepsis-3', 'sepsis_angus', 'sepsis_explicit', 'severe_sepsis_explicit']
+	False Features
+		['weight_325.21to616.25']
+	Numeric Features
+	--------------------
+Context #12
+	True Features
+	False Features
+		['age_58.47to75.13', 'hosp_los_63.44to206.43', 'icu_los_34.33to101.74', 'lods_12.18to20.0', 'septic_shock_explicit']
+	Numeric Features
+	--------------------
+Context #13
+	True Features
+		['hosp_los_0.0to8.76', 'icu_los_0.0to4.91']
+	False Features
+		['age_58.47to75.13', 'age_75.13to91.4', 'icu_los_4.91to14.21']
+	Numeric Features
+	--------------------
+	====================
+

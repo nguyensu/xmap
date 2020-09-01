@@ -1,1 +1,70 @@
 	Load cleaned data from models/xmap_k15_ns5_s2_mammo_data.cleandata
+Learning UMAP ...
+	Load trained umap from models/xmap_k15_ns5_s2_mammo_data.unsupervised_umap
+Learning topological relations and Determining contexts ....
+	Load trained umap from models/xmap_k15_ns5_s2_mammo_data.unsupervised_soinn
+Explaining contexts ...
+Context #1
+	True Features
+		['Age_geq_30']
+	False Features
+		['Age_lt_30', 'MicrolobulatedMargin', 'ObscuredMargin', 'RoundShape']
+	Numeric Features
+	--------------------
+Context #2
+	True Features
+		['Age_geq_30']
+	False Features
+		['Age_lt_30', 'CircumscribedMargin', 'MicrolobulatedMargin', 'SpiculatedMargin']
+	Numeric Features
+	--------------------
+Context #3
+	True Features
+		['Age_geq_30', 'Age_geq_45', 'RoundShape']
+	False Features
+		['LobularShape', 'OvalShape']
+	Numeric Features
+	--------------------
+Context #4
+	True Features
+	False Features
+		['IllDefinedMargin']
+	Numeric Features
+	--------------------
+Context #5
+	True Features
+		['Age_geq_30', 'Age_geq_45', 'IllDefinedMargin', 'IrregularShape']
+	False Features
+		['RoundShape']
+	Numeric Features
+	--------------------
+Context #6
+	True Features
+		['Age_geq_30', 'RoundShape']
+	False Features
+		['IrregularShape', 'LobularShape', 'OvalShape']
+	Numeric Features
+	--------------------
+Context #7
+	True Features
+		['Age_geq_30']
+	False Features
+		['Age_lt_30', 'MicrolobulatedMargin', 'SpiculatedMargin']
+	Numeric Features
+	--------------------
+Context #8
+	True Features
+		['Age_geq_30', 'Age_geq_45', 'Age_geq_60']
+	False Features
+		['LobularShape', 'OvalShape']
+	Numeric Features
+	--------------------
+Context #9
+	True Features
+		['Age_geq_30']
+	False Features
+		['LobularShape', 'MicrolobulatedMargin', 'ObscuredMargin', 'RoundShape']
+	Numeric Features
+	--------------------
+	====================
+

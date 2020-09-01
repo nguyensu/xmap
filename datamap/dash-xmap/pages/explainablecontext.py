@@ -76,6 +76,16 @@ def create_layout(app, params):
                                         style={'width': '50%', 'display': 'inline-block'},
                                     ),
                                     html.Div(
+                                        [
+                                            dcc.Dropdown(
+                                                id='context-dropdown',
+                                                options=[
+                                                    {'label': "No Context", 'value': 0}
+                                                ],
+                                                value=0,
+                                                # labelStyle={'display': 'inline-block'}
+                                            ),
+                                        ],
                                         id="context-select",
                                         style={'width': '20%', 'display': 'inline-block'},
                                     ),

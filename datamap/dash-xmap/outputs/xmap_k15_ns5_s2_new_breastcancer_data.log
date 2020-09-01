@@ -1,1 +1,67 @@
 	Load cleaned data from models/xmap_k15_ns5_s2_new_breastcancer_data.cleandata
+Learning UMAP ...
+	Load trained umap from models/xmap_k15_ns5_s2_new_breastcancer_data.unsupervised_umap
+Learning topological relations and Determining contexts ....
+	Load trained umap from models/xmap_k15_ns5_s2_new_breastcancer_data.unsupervised_soinn
+Explaining contexts ...
+Context #1
+	True Features
+	False Features
+	Numeric Features
+	--------------------
+Context #2
+	True Features
+	False Features
+		['Mitoses_8.63to10.0', 'UniformityOfCellShape_1.0to2.49']
+	Numeric Features
+	--------------------
+Context #3
+	True Features
+	False Features
+		['Mitoses_8.63to10.0']
+	Numeric Features
+	--------------------
+Context #4
+	True Features
+	False Features
+		['UniformityOfCellSize_1.0to2.46']
+	Numeric Features
+	--------------------
+Context #5
+	True Features
+	False Features
+		['BlandChromatin_7.88to10.0', 'MarginalAdhesion_7.87to10.0', 'Mitoses_8.63to10.0', 'SingleEpithelialCellSize_5.33to7.7', 'UniformityOfCellShape_7.92to10.0']
+	Numeric Features
+	--------------------
+Context #6
+	True Features
+		['BareNuclei_1.0to2.55', 'BlandChromatin_1.0to3.24', 'ClumpThickness_1.0to3.25', 'MarginalAdhesion_1.0to2.41', 'UniformityOfCellShape_1.0to2.49']
+	False Features
+	Numeric Features
+	--------------------
+Context #7
+	True Features
+	False Features
+		['BlandChromatin_7.88to10.0', 'ClumpThickness_1.0to3.25', 'Mitoses_5.36to8.63', 'Mitoses_8.63to10.0', 'UniformityOfCellSize_7.91to10.0']
+	Numeric Features
+	--------------------
+Context #8
+	True Features
+		['BareNuclei_1.0to2.55', 'Mitoses_1.0to2.26', 'SingleEpithelialCellSize_1.0to3.25', 'UniformityOfCellShape_1.0to2.49', 'UniformityOfCellSize_1.0to2.46']
+	False Features
+	Numeric Features
+	--------------------
+Context #9
+	True Features
+		['BareNuclei_1.0to2.55', 'BlandChromatin_1.0to3.24', 'ClumpThickness_1.0to3.25', 'Mitoses_1.0to2.26', 'NormalNucleoli_1.0to2.39']
+	False Features
+	Numeric Features
+	--------------------
+Context #10
+	True Features
+		['BareNuclei_1.0to2.55', 'BlandChromatin_1.0to3.24', 'ClumpThickness_1.0to3.25', 'NormalNucleoli_1.0to2.39', 'UniformityOfCellSize_1.0to2.46']
+	False Features
+	Numeric Features
+	--------------------
+	====================
+

@@ -19,39 +19,18 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09e6e30e-ef42-4ccf-8191-9a2649d2d12f" name="Default Changelist" comment="clean up the code and fix dash dynamic object creation issues">
+    <list default="true" id="09e6e30e-ef42-4ccf-8191-9a2649d2d12f" name="Default Changelist" comment="annotate the codes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datamap/dash-xmap/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/datamap/dash-xmap/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datamap/dash-xmap/outputs/xmap_k15_ns5_s2_australian_data.log" beforeDir="false" afterPath="$PROJECT_DIR$/datamap/dash-xmap/outputs/xmap_k15_ns5_s2_australian_data.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datamap/dash-xmap/outputs/xmap_k15_ns5_s2_mushroom_data.log" beforeDir="false" afterPath="$PROJECT_DIR$/datamap/dash-xmap/outputs/xmap_k15_ns5_s2_mushroom_data.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datamap/dash-xmap/outputs/xmap_k15_ns5_s2_new_churn_data.log" beforeDir="false" afterPath="$PROJECT_DIR$/datamap/dash-xmap/outputs/xmap_k15_ns5_s2_new_churn_data.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datamap/dash-xmap/outputs/xmap_k15_ns5_s2_new_german_data.log" beforeDir="false" afterPath="$PROJECT_DIR$/datamap/dash-xmap/outputs/xmap_k15_ns5_s2_new_german_data.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datamap/notes.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datamap/dash-xmap/new_performance_xmap_s10_theta001.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datamap/dash-xmap/new_performance_xmap_s20_theta001.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datamap/dash-xmap/new_performance_xmap_s5_theta001.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datamap/dash-xmap/new_performance_xmap_s5_theta01.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datamap/dash-xmap/performance_xmap_s20_theta1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datamap/dash-xmap/performance_xmap_s5_theta001.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datamap/dash-xmap/performance_xmap_s5_theta005.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/datamap/xmap.py" beforeDir="false" afterPath="$PROJECT_DIR$/datamap/xmap.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datamap/xmap_risk.py" beforeDir="false" afterPath="$PROJECT_DIR$/datamap/xmap_risk.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/skrules/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skrules/datasets/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skrules/datasets/credit_data.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skrules/rule.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skrules/skope_rules.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skrules/tests/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skrules/tests/test_common.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skrules/tests/test_rule.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skrules/tests/test_skope_rules.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soms/art-python-master.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soms/reading/Hasegawa1.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soms/soinn/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soms/soinn/python/asc.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soms/soinn/python/asoinn_demo.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soms/soinn/python/fast_soinn.py" beforeDir="false" afterPath="$PROJECT_DIR$/topolearning/algorithm/python/atl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/soms/soinn/python/fast_soinn_backup.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soms/soinn/python/overlap_demo.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soms/soinn/python/soinn_demo.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soms/soinn/python/soinn_demo_train.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soms/soinn/python/soinn_newsgroup.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soms/somoclutry/evolvemap.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soms/somoclutry/somoclu_20news.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/soms/somoclutry/somoclu_simple.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datamap/xmap_risk.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -306,7 +285,8 @@
       <workItem from="1591174947486" duration="2494000" />
       <workItem from="1598924248523" duration="626000" />
       <workItem from="1598925135322" duration="1140000" />
-      <workItem from="1598932649199" duration="11957000" />
+      <workItem from="1598932649199" duration="12590000" />
+      <workItem from="1599024410276" duration="4233000" />
     </task>
     <task id="LOCAL-00001" summary="adding SOINN algorithm to identify clusters">
       <created>1564101866574</created>
@@ -378,7 +358,14 @@
       <option name="project" value="LOCAL" />
       <updated>1598940966804</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="annotate the codes">
+      <created>1598952301780</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1598952301780</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -448,7 +435,8 @@
     <MESSAGE value="adding predictive modeling tab and start working on the ML algorithms &lt;= context and raw data inputs" />
     <MESSAGE value="new data and fine-tune" />
     <MESSAGE value="clean up the code and fix dash dynamic object creation issues" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean up the code and fix dash dynamic object creation issues" />
+    <MESSAGE value="annotate the codes" />
+    <option name="LAST_COMMIT_MESSAGE" value="annotate the codes" />
   </component>
   <component name="WindowStateProjectService">
     <state x="652" y="396" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1598933441946">
@@ -459,46 +447,46 @@
       <screen x="0" y="23" width="2048" height="1129" />
     </state>
     <state width="386" height="466" key="DebuggerActiveHint/0.23.2048.1129@0.23.2048.1129" timestamp="1598932813469" />
-    <state width="2006" height="314" key="GridCell.Tab.0.bottom" timestamp="1598948219413">
+    <state width="2006" height="386" key="GridCell.Tab.0.bottom" timestamp="1599005528260">
       <screen x="0" y="23" width="2048" height="1129" />
     </state>
-    <state width="2006" height="314" key="GridCell.Tab.0.bottom/0.23.2048.1129@0.23.2048.1129" timestamp="1598948219413" />
-    <state width="2006" height="314" key="GridCell.Tab.0.center" timestamp="1598948219413">
+    <state width="2006" height="386" key="GridCell.Tab.0.bottom/0.23.2048.1129@0.23.2048.1129" timestamp="1599005528260" />
+    <state width="2006" height="386" key="GridCell.Tab.0.center" timestamp="1599005528260">
       <screen x="0" y="23" width="2048" height="1129" />
     </state>
-    <state width="2006" height="314" key="GridCell.Tab.0.center/0.23.2048.1129@0.23.2048.1129" timestamp="1598948219413" />
-    <state width="2006" height="314" key="GridCell.Tab.0.left" timestamp="1598948219413">
+    <state width="2006" height="386" key="GridCell.Tab.0.center/0.23.2048.1129@0.23.2048.1129" timestamp="1599005528260" />
+    <state width="2006" height="386" key="GridCell.Tab.0.left" timestamp="1599005528260">
       <screen x="0" y="23" width="2048" height="1129" />
     </state>
-    <state width="2006" height="314" key="GridCell.Tab.0.left/0.23.2048.1129@0.23.2048.1129" timestamp="1598948219413" />
-    <state width="2006" height="314" key="GridCell.Tab.0.right" timestamp="1598948219413">
+    <state width="2006" height="386" key="GridCell.Tab.0.left/0.23.2048.1129@0.23.2048.1129" timestamp="1599005528260" />
+    <state width="2006" height="386" key="GridCell.Tab.0.right" timestamp="1599005528260">
       <screen x="0" y="23" width="2048" height="1129" />
     </state>
-    <state width="2006" height="314" key="GridCell.Tab.0.right/0.23.2048.1129@0.23.2048.1129" timestamp="1598948219413" />
-    <state width="2006" height="386" key="GridCell.Tab.1.bottom" timestamp="1598933545480">
+    <state width="2006" height="386" key="GridCell.Tab.0.right/0.23.2048.1129@0.23.2048.1129" timestamp="1599005528260" />
+    <state width="2006" height="386" key="GridCell.Tab.1.bottom" timestamp="1599005528260">
       <screen x="0" y="23" width="2048" height="1129" />
     </state>
-    <state width="2006" height="386" key="GridCell.Tab.1.bottom/0.23.2048.1129@0.23.2048.1129" timestamp="1598933545480" />
-    <state width="2006" height="386" key="GridCell.Tab.1.center" timestamp="1598933545480">
+    <state width="2006" height="386" key="GridCell.Tab.1.bottom/0.23.2048.1129@0.23.2048.1129" timestamp="1599005528260" />
+    <state width="2006" height="386" key="GridCell.Tab.1.center" timestamp="1599005528260">
       <screen x="0" y="23" width="2048" height="1129" />
     </state>
-    <state width="2006" height="386" key="GridCell.Tab.1.center/0.23.2048.1129@0.23.2048.1129" timestamp="1598933545480" />
-    <state width="2006" height="386" key="GridCell.Tab.1.left" timestamp="1598933545480">
+    <state width="2006" height="386" key="GridCell.Tab.1.center/0.23.2048.1129@0.23.2048.1129" timestamp="1599005528260" />
+    <state width="2006" height="386" key="GridCell.Tab.1.left" timestamp="1599005528260">
       <screen x="0" y="23" width="2048" height="1129" />
     </state>
-    <state width="2006" height="386" key="GridCell.Tab.1.left/0.23.2048.1129@0.23.2048.1129" timestamp="1598933545480" />
-    <state width="2006" height="386" key="GridCell.Tab.1.right" timestamp="1598933545480">
+    <state width="2006" height="386" key="GridCell.Tab.1.left/0.23.2048.1129@0.23.2048.1129" timestamp="1599005528260" />
+    <state width="2006" height="386" key="GridCell.Tab.1.right" timestamp="1599005528260">
       <screen x="0" y="23" width="2048" height="1129" />
     </state>
-    <state width="2006" height="386" key="GridCell.Tab.1.right/0.23.2048.1129@0.23.2048.1129" timestamp="1598933545480" />
+    <state width="2006" height="386" key="GridCell.Tab.1.right/0.23.2048.1129@0.23.2048.1129" timestamp="1599005528260" />
     <state x="525" y="226" key="SettingsEditor" timestamp="1598924397509">
       <screen x="0" y="23" width="2048" height="1129" />
     </state>
     <state x="525" y="226" key="SettingsEditor/0.23.2048.1129@0.23.2048.1129" timestamp="1598924397509" />
-    <state x="624" y="327" key="Vcs.Push.Dialog.v2" timestamp="1598940973425">
+    <state x="624" y="327" key="Vcs.Push.Dialog.v2" timestamp="1598952306666">
       <screen x="0" y="23" width="2048" height="1129" />
     </state>
-    <state x="624" y="327" key="Vcs.Push.Dialog.v2/0.23.2048.1129@0.23.2048.1129" timestamp="1598940973425" />
+    <state x="624" y="327" key="Vcs.Push.Dialog.v2/0.23.2048.1129@0.23.2048.1129" timestamp="1598952306666" />
     <state x="822" y="508" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1598940881012">
       <screen x="0" y="23" width="2048" height="1129" />
     </state>
@@ -532,11 +520,6 @@
           <option name="timeStamp" value="62" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/datamap/xmap_risk.py</url>
-          <line>352</line>
-          <option name="timeStamp" value="100" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/datamap/preprocessDATA.py</url>
           <line>119</line>
           <option name="timeStamp" value="202" />
@@ -558,7 +541,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/datamap/dash-xmap/app.py</url>
-          <line>130</line>
+          <line>144</line>
           <option name="timeStamp" value="218" />
         </line-breakpoint>
       </breakpoints>
@@ -588,7 +571,7 @@
     <SUITE FILE_PATH="coverage/DataMAP$use_hoverdata_asinput_for_othergraphs.coverage" NAME="use_hoverdata_asinput_for_othergraphs Coverage Results" MODIFIED="1566390607681" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dashboard/tutorial" />
     <SUITE FILE_PATH="coverage/DataMAP$simple_app.coverage" NAME="simple_app Coverage Results" MODIFIED="1566306546173" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dashboard/tutorial" />
     <SUITE FILE_PATH="coverage/DataMAP$simple_multiiple_outputs_cal.coverage" NAME="simple_multiiple_outputs_cal Coverage Results" MODIFIED="1566388403587" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dashboard/tutorial" />
-    <SUITE FILE_PATH="coverage/XMAP$XMAP_app.coverage" NAME="XMAP app Coverage Results" MODIFIED="1598948219409" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/datamap/dash-xmap" />
+    <SUITE FILE_PATH="coverage/XMAP$XMAP_app.coverage" NAME="XMAP app Coverage Results" MODIFIED="1599027869284" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/datamap/dash-xmap" />
     <SUITE FILE_PATH="coverage/DataMAP$demo_of_interactive_features_chart.coverage" NAME="demo_of_interactive_features_chart Coverage Results" MODIFIED="1566390072639" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dashboard/tutorial" />
     <SUITE FILE_PATH="coverage/SUMAP$fast_soinn.coverage" NAME="fast_soinn Coverage Results" MODIFIED="1565173958010" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/soms/soinn/python" />
     <SUITE FILE_PATH="coverage/SUMAP$df_plotly.coverage" NAME="df_plotly Coverage Results" MODIFIED="1564916214559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/stream" />

@@ -1,4 +1,11 @@
-# -*- coding: utf-8 -*-
+"""
+Author: Su Nguyen,
+Centre for Data Analytics and Cognition (CDAC), La Trobe University
+
+This file is used to built the interactive interface for XMAP. If the user would like to run all steps for each
+dataset, they can use the runall function.
+
+"""
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -15,8 +22,11 @@ from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import KFold
 from sklearn.model_selection import StratifiedKFold
 
-NN = 30
-NS = 5
+'''
+Parameters for UMAP
+'''
+NN = 30 # number of nearest neighbors
+NS = 5 # negative sampling
 
 datasets = ["new_german_data", "new_heart_data", "new_churn_data", "new_icu_data", "new_hribm_data", "bank_data", "new_spambase_data", "mushroom_data", "new_breastcancer_data", "adult_data",
                 "australian_data", "mammo_data"]
@@ -55,25 +65,27 @@ app.layout = html.Div(
 )
 app.config['suppress_callback_exceptions'] = True
 
-# Update page
+'''
+Navigator for the XMAP GUI
+'''
 @app.callback(Output("page-content", "children"), [Input("url", "pathname")])
 def display_page(pathname):
-    if "data" not in parameter_dict:
+    if "data" not in parameter_dict: # overview page
         return overview.create_layout(app, parameter_dict)
-    elif pathname == "/dash-xmap/statistics":
+    elif pathname == "/dash-xmap/statistics": # descriptive statistic page
         return statistics.create_layout(app, parameter_dict)
-    elif pathname == "/dash-xmap/map":
+    elif pathname == "/dash-xmap/map": # umap visualisation page
         parameter_dict["map"] = run_xmap(dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS,
-                                         seed=2,
+                                         seed=2, # to be selected by users (to be in the interface soon)
                                          return_step=STEP.UMAP_TRAINED)
         return map.create_layout(app, parameter_dict)
-    elif pathname == "/dash-xmap/topology":
+    elif pathname == "/dash-xmap/topology": # visualise the topology of the dataset
         init_topo()
         return topology.create_layout(app, parameter_dict)
-    elif pathname == "/dash-xmap/explainablecontext":
+    elif pathname == "/dash-xmap/explainablecontext": # explain the cluster/context obtained by the topology
         assign_parameters()
         return explainablecontext.create_layout(app, parameter_dict)
-    elif pathname == "/dash-xmap/predictivemodel":
+    elif pathname == "/dash-xmap/predictivemodel": # build, validate, and examine trained classifiers
         assign_parameters()
         return predictivemodel.create_layout(app, parameter_dict)
     elif pathname == "/dash-xmap/full-view":
@@ -85,7 +97,9 @@ def display_page(pathname):
     else:
         return overview.create_layout(app, parameter_dict)
 
-
+'''
+Initialise parameter for ATL
+'''
 def init_topo():
     embeddings, nodes, connection, classes, nclusters, node_indices, indices = run_xmap(
         dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS, seed=2,

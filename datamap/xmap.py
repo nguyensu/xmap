@@ -47,7 +47,7 @@ class LEARN(Enum):
     SUPERVISED = 1
 
 """
-plotting ATL outputs using matplotlib
+plotting ATL outputs using matplotlib (supporting function)
 """
 def plot_atl(nodes, connection):
     plt.tight_layout()
@@ -66,7 +66,7 @@ def print_output(*argv, ee="\n"):
     f.flush()
 
 """
-plotting umap outputs using matplotlib. Using convex hull to visualise clusters.
+plotting umap outputs using matplotlib. Using convex hull to visualise clusters (supporting function)
 """
 def plot_embedding_space(embedding, labels=None, label_index=None, lnames=None, data_name=""):
     plt.rc('legend', **{'fontsize': 15})
@@ -115,6 +115,14 @@ def plot_embedding_space(embedding, labels=None, label_index=None, lnames=None, 
 
 """
 main XMAP algorithms
+```
+n_neighbors and negative_sample_rate: are two parameters used in UMAP. Larger n_neighbors will help UMAP capture the
+global structure better (but will be more computationally expensive). Larger negative_sample_rate will likely form 
+more cluttered embedding.  
+seed: random seed to ensure reproducibility
+return_step: to determine the step in which the ouputs will be returned
+learn_mode: unsupervised (used class labels to create the endedding) or unsupervised
+runall: True if you want to run all steps and return the classifers.
 """
 def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=None, model_folder="models",
              return_step=STEP.DATA_CLEANED, learn_mode = LEARN.UNSUPERVISED, runall= False):
@@ -123,10 +131,11 @@ def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=Non
     SEED = seed
     NNK = n_neighbors
     NS = negative_sample_rate
+    # define the distance measure to be used in UMAP. Many options are available in UMAP
     distancem = "euclidean"
     np.random.seed(SEED)
+    # define the path to store intermediate outputs
     pathname = model_folder + "/" + "xmap_k{}_ns{}_s{}_".format(NNK, NS, SEED) + dataset
-    # pathname = model_folder + "/" + "xmap_k{}_ns{}_s{}_dist{}_".format(NNK, NS, SEED, distancem) + dataset
     current_step = STEP.INITIALIZING
     t0 = time.time()
 
@@ -149,7 +158,6 @@ def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=Non
         scaler = MinMaxScaler()
         scaler.fit(X)
         X_norm = scaler.transform(X)
-        # umap
         last_step = STEP.DATA_CLEANED
         pickle.dump((X_norm, Y, scaler, nfeatures, feature_names, target_name), open(pathname + ".cleandata", "wb"))
     else:
@@ -185,10 +193,8 @@ def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=Non
     current_step = STEP.UMAP_TRAINED
     if current_step == return_step:
         return embedding
-    # fig, ax = plt.subplots(figsize=(6, 5))
     lnames = ["Negative", "Positive"]
     Y = Y.reshape(-1)
-    # color = [Y[i] for i in range(X.shape[0])]
     cmap = ["blue", "red",  "purple", "hotpink", "black", "green", "orange", "teal", "brown",
             "lightsteelblue", "gray", "lime", "coral", "plum", "gold", "c", "tomato", "blueviolet",
             "darkseagreen"]
@@ -202,7 +208,7 @@ def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=Non
     # connection (different from the second best) links to the BMU. If max_age is too small the topological relationships will
     # be prematurely destroyed. Meanwhile if max_age is too large, some useless connections may survive because of randomness
     # or noise --> ATL needs to run longer to get the accurate results and more relationships will be preserved.
-    # lamb: is the number of steps (or number of processed inputs) before SOINN checks and cleans up the network. Lambda has
+    # lamb: is the number of steps (or number of processed inputs) before ATL checks and cleans up the network. Lambda has
     # a similar effect as compared to max_age, i.e. small lamb leads to unstable network (unable to establish topological
     # relationhips) while large lamb may lead to redundant nodes and connections.
     print_output("Learning topological relations and Determining contexts ....")
@@ -220,13 +226,14 @@ def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=Non
         cmap = cmap*10
         if return_step == None:
             plot_atl(nodes, connection)
-
+        # create a network representation of the learned ATL graph
         G = nx.Graph()
         for i in range(0, nodes.shape[0]):
             for j in range(0, nodes.shape[0]):
                 if connection[i, j] != 0:
                     G.add_edge(i, j, weight=1.0)
 
+        # use community detection algorithms to discover the subgraph community
         network_cd_alg = "best"
         n_components = nx.number_connected_components(G)
         max_context = int(n_components + np.sqrt(n_components))
@@ -271,6 +278,10 @@ def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=Non
             for n in comp:
                 classes[n] = count
             count += 1
+
+        # each components or subgraphs can be treated as clusters as the ATL only links nodes with similar patterns
+        # togethers. The lack of connections between two nodes indicates that there two nodes or data matching these
+        # two nodes should belong to the same cluster.
         nclusters = len(components)
         nbrs = NearestNeighbors(n_neighbors=1).fit(nodes)
         distances, indices = nbrs.kneighbors(embedding)
@@ -284,11 +295,11 @@ def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=Non
     current_step = STEP.ATL_TRAINED
     if current_step == return_step:
         return embedding, nodes, connection, classes, nclusters, node_indices, indices
+
     """
     STEP 4: Try to explain context/cluster using Context Description Approximation (CDA). Can work with original 
     features or interactive terms (representing or/and relations).
     """
-    # classes = [cid[c] for c in classes]
     cid = [c for c in range(nclusters+1)]
     cid = cid + [100]
     if learn_mode == LEARN.UNSUPERVISED:
@@ -296,10 +307,10 @@ def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=Non
     else:
         explainnname = ".supervised_explain"
     if True or runall or not os.path.exists(pathname + explainnname):
-        finteraction = False
-        interactionAND = False
-        n_identity_feature = 5 #40 #20
-        active_threshold = 0.01 #0.05 #0.1
+        finteraction = False # True if interactive terms are considered
+        interactionAND = False # True if AND relation is used
+        n_identity_feature = 5 # determine the number of features/variables used to describe the cluster/context
+        active_threshold = 0.01 # threshold to determine if a feature value can represent a given cluster/context
         cmap = 10*["red", "blue", "purple", "hotpink", "black", "green", "orange", "teal", "brown",
                 "lightsteelblue", "gray", "lime", "coral", "plum", "gold", "c", "tomato", "blueviolet",
                 "darkseagreen"]
@@ -311,7 +322,6 @@ def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=Non
         poly = PolynomialFeatures(interaction_only=True, include_bias=False)
         cluster_explainer_dict = {}
         if nclusters > 1:
-            # intepret the context
             print_output("Explaining contexts ...")
             xcluster_id = np.zeros(embedding.shape[0])
             xcluster_id_details = np.zeros((embedding.shape[0], nclusters))
@@ -340,6 +350,7 @@ def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=Non
                 feature_names_I = feature_names_I.split(",")
                 feature_names = feature_names_I
                 outputs = np.zeros((nclusters, len(feature_names)))
+            # for each cluster/context, repetitive patterns will be determined
             for i in range(nclusters):
                 cluster_id = i #cluster_id_ranked_by_size[i]
                 print_output("Context #" + str(cluster_id+1))
@@ -354,7 +365,6 @@ def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=Non
                 ranked_features = np.argsort(outputs[cluster_id])
                 for fi in ranked_features:
                     if outputs[cluster_id][fi] <= active_threshold:
-                        # val = np.unique(Xc[::, fi])
                         (values, counts) = np.unique(Xc[::,fi], return_counts=True)
                         ind = np.argmax(counts)
                         val = values[ind]
@@ -366,11 +376,8 @@ def run_xmap(dataset=None, n_neighbors=None, negative_sample_rate=None, seed=Non
                             numeric_features.append(fi)
                     else:
                         impure_features.append((fi, np.min(Xc[::, fi]), np.max(Xc[::, fi]), np.average(Xc[::, fi])))
-                # cluster_characteristic_dict[cluster_id] = [true_features, false_features, numeric_features]
                 nzeros = len(feature_names) - np.count_nonzero(outputs[cluster_id])
                 mask = np.ones((embedding.shape[0], ), dtype=bool)
-                # if nzeros > n_identity_feature:
-                #     n_identity_feature = nzeros
                 countf = 0
                 print_output("\tTrue Features")
                 count = 0

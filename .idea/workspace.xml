@@ -21,14 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="09e6e30e-ef42-4ccf-8191-9a2649d2d12f" name="Default Changelist" comment="cleaning the xmap codes (core algorithms)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datamap/dash-xmap/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/datamap/dash-xmap/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datamap/dash-xmap/outputs/xmap_k15_ns5_s2_adult_data.log" beforeDir="false" afterPath="$PROJECT_DIR$/datamap/dash-xmap/outputs/xmap_k15_ns5_s2_adult_data.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datamap/dash-xmap/outputs/xmap_k15_ns5_s2_bank_data.log" beforeDir="false" afterPath="$PROJECT_DIR$/datamap/dash-xmap/outputs/xmap_k15_ns5_s2_bank_data.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datamap/dash-xmap/outputs/xmap_k15_ns5_s2_mammo_data.log" beforeDir="false" afterPath="$PROJECT_DIR$/datamap/dash-xmap/outputs/xmap_k15_ns5_s2_mammo_data.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datamap/dash-xmap/outputs/xmap_k15_ns5_s2_new_churn_data.log" beforeDir="false" afterPath="$PROJECT_DIR$/datamap/dash-xmap/outputs/xmap_k15_ns5_s2_new_churn_data.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datamap/dash-xmap/outputs/xmap_k15_ns5_s2_new_german_data.log" beforeDir="false" afterPath="$PROJECT_DIR$/datamap/dash-xmap/outputs/xmap_k15_ns5_s2_new_german_data.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datamap/dash-xmap/outputs/xmap_k15_ns5_s2_new_hribm_data.log" beforeDir="false" afterPath="$PROJECT_DIR$/datamap/dash-xmap/outputs/xmap_k15_ns5_s2_new_hribm_data.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datamap/dash-xmap/pages/predictivemodel.py" beforeDir="false" afterPath="$PROJECT_DIR$/datamap/dash-xmap/pages/predictivemodel.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -293,6 +285,7 @@
       <workItem from="1601721828562" duration="2337000" />
       <workItem from="1601862866960" duration="1046000" />
       <workItem from="1604021232369" duration="81000" />
+      <workItem from="1604021405919" duration="2504000" />
     </task>
     <task id="LOCAL-00001" summary="adding SOINN algorithm to identify clusters">
       <created>1564101866574</created>
@@ -378,7 +371,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599029015876</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="cleaning the xmap codes (core algorithms)">
+      <created>1604021439779</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1604021439779</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -497,14 +497,14 @@
       <screen x="0" y="23" width="2048" height="1129" />
     </state>
     <state x="525" y="226" key="SettingsEditor/0.23.2048.1129@0.23.2048.1129" timestamp="1598924397509" />
-    <state x="624" y="327" key="Vcs.Push.Dialog.v2" timestamp="1604021274466">
+    <state x="624" y="327" key="Vcs.Push.Dialog.v2" timestamp="1604021452307">
       <screen x="0" y="23" width="2048" height="1129" />
     </state>
-    <state x="624" y="327" key="Vcs.Push.Dialog.v2/0.23.2048.1129@0.23.2048.1129" timestamp="1604021274466" />
-    <state x="822" y="508" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1598940881012">
+    <state x="624" y="327" key="Vcs.Push.Dialog.v2/0.23.2048.1129@0.23.2048.1129" timestamp="1604021452307" />
+    <state x="822" y="508" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1604021507869">
       <screen x="0" y="23" width="2048" height="1129" />
     </state>
-    <state x="822" y="508" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.2048.1129@0.23.2048.1129" timestamp="1598940881012" />
+    <state x="822" y="508" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.2048.1129@0.23.2048.1129" timestamp="1604021507869" />
     <state x="725" y="220" width="598" height="735" key="find.popup" timestamp="1598933409778">
       <screen x="0" y="23" width="2048" height="1129" />
     </state>

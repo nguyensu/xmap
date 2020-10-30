@@ -25,16 +25,27 @@ from sklearn.model_selection import StratifiedKFold
 '''
 Parameters for UMAP
 '''
-NN = 30 # number of nearest neighbors
+NN = 15 # number of nearest neighbors
 NS = 5 # negative sampling
+SEED = 2 # seed value for XMAP
 
+'''
+define the existing datasets; with new dataset, please put them in the ../data folder (.csv) and insert the name dataset
+name in the below list
+'''
 datasets = ["new_german_data", "new_heart_data", "new_churn_data", "new_icu_data", "new_hribm_data", "bank_data", "new_spambase_data", "mushroom_data", "new_breastcancer_data", "adult_data",
                 "australian_data", "mammo_data"]
+'''
+more descriptive name to show in XMAP app
+'''
 datasets_labels = ["German Credit Risk", "Heart Disease", "Customer Churn", "ICU", "HR-IBM", "Bank", "Spambase", "Mushroom", "Breast Cancer", "Adult",
                 "Australian Credit Risk", "Mammo"]
 
 dataset_dict = {datasets[i]: datasets_labels[i] for i in range(len(datasets))}
 
+'''
+setup dash app
+'''
 app = dash.Dash(
     __name__, meta_tags=[{"name": "viewport", "content": "width=device-width"}]
 )
@@ -76,7 +87,7 @@ def display_page(pathname):
         return statistics.create_layout(app, parameter_dict)
     elif pathname == "/dash-xmap/map": # umap visualisation page
         parameter_dict["map"] = run_xmap(dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS,
-                                         seed=2, # to be selected by users (to be in the interface soon)
+                                         seed=SEED, # to be selected by users (to be in the interface soon)
                                          return_step=STEP.UMAP_TRAINED)
         return map.create_layout(app, parameter_dict)
     elif pathname == "/dash-xmap/topology": # visualise the topology of the dataset
@@ -98,11 +109,11 @@ def display_page(pathname):
         return overview.create_layout(app, parameter_dict)
 
 '''
-Initialise parameter for ATL
+Initialise parameters for ATL
 '''
 def init_topo():
     embeddings, nodes, connection, classes, nclusters, node_indices, indices = run_xmap(
-        dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS, seed=2,
+        dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS, seed=SEED,
         return_step=STEP.ATL_TRAINED)
     parameter_dict["map"] = embeddings
     parameter_dict["network_nodes"] = nodes
@@ -112,10 +123,12 @@ def init_topo():
     parameter_dict["network_node_indices"] = node_indices
     parameter_dict["network_indices_to_clusters"] = indices
 
-
+'''
+support function for recording UMAP parameters
+'''
 def assign_parameters():
     embeddings, nodes, connection, classes, nclusters, node_indices, indices, cluster_explainer_dict, xcluster_id_details, xfeaturenames \
-        = run_xmap(dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS, seed=2,
+        = run_xmap(dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS, seed=SEED,
                    return_step=STEP.CONTEXT_EXPLAINED)
     parameter_dict["map"] = embeddings
     parameter_dict["network_nodes"] = nodes
@@ -128,7 +141,9 @@ def assign_parameters():
     parameter_dict["context_vector"] = xcluster_id_details
     parameter_dict["explain_feature_names"] = xfeaturenames
 
-
+'''
+update the overview page with the selected dataset
+'''
 @app.callback(
     [
         Output('dataset-notes', 'children'),
@@ -138,10 +153,9 @@ def assign_parameters():
     [
         Input('dataset-dropdown', 'value')
     ])
-# @app.callback([], [Input('dataset-dropdown', 'value')])
 def update_output(value):
     if "dataname" not in parameter_dict or parameter_dict["dataname"] != value:
-        X_norm, Y, scaler, nfeatures, feature_names, target_name = run_xmap(dataset=value, n_neighbors=NN, negative_sample_rate=NS, seed=2, return_step=STEP.DATA_CLEANED)
+        X_norm, Y, scaler, nfeatures, feature_names, target_name = run_xmap(dataset=value, n_neighbors=NN, negative_sample_rate=NS, seed=SEED, return_step=STEP.DATA_CLEANED)
         feature_names_display = [ff.replace("ubar", "_").replace("dot", ".") for ff in feature_names]
         data = pd.DataFrame(np.concatenate((Y, X_norm), axis=1), columns=[target_name] + feature_names_display)
         parameter_dict["data"] = data
@@ -170,6 +184,9 @@ def update_output(value):
     return 'You have selected "{}" dataset with `{} instances` and `{} features`. Below is a subset of the data set.'.format(dataset_dict[value], len(parameter_dict["data"]), parameter_dict["nfeatures"]), \
            [{"name": i, "id": i} for i in parameter_dict["data"].columns], style_data_conditional
 
+'''
+update data table with the selected dataset
+'''
 @app.callback(
     Output('data-table', 'data'),
     [
@@ -183,6 +200,9 @@ def update_data_table(cols, page_current,page_size):
         return pd.DataFrame([]).to_dict('records')
     return parameter_dict["data"].round(3).iloc[page_current*page_size:(page_current+ 1)*page_size].to_dict('records')
 
+'''
+update the graphs visualise class distribution of the selected dataset
+'''
 @app.callback(
     Output('graph-2', 'figure'),
     [Input('data-table', 'columns')])
@@ -197,7 +217,9 @@ def update_distribution_target_chart(cols):
                 margin={"l": 50, "r": 50, },
                 showlegend=False)}
 
-
+'''
+update the feature list with the selected dataset
+'''
 @app.callback(
     Output('feature-space', 'children'),
     [Input('data-table', 'columns')])
@@ -219,7 +241,9 @@ def update_feature_dropdown(cols):
                 ],
                 value=parameter_dict["feature_names"][0]
                                     )
-
+'''
+update the charts visualising the features of selected dataset
+'''
 @app.callback(
     Output('graph-feature_corr', 'figure'),
     [Input('feature-dropdown', 'value')])
@@ -234,9 +258,11 @@ def update_figure_feature_corr(value):
                             )],
             "layout": go.Layout(title=feature + " vs " + parameter_dict["target_name"],
                                 margin={"l": 30, "r": 30, })
-                                # legend={"x": 1, "y": 0.7})
     }
 
+'''
+update UMAP embedding with the selected dataset
+'''
 @app.callback(
     Output('data-map', 'figure'),
     [
@@ -247,11 +273,11 @@ def update_figure_feature_corr(value):
 )
 def update_map(size, opacity, mapmode):
     if mapmode == "Unsupervised":
-        parameter_dict["map"] = run_xmap(dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS, seed=2,
+        parameter_dict["map"] = run_xmap(dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS, seed=SEED,
                                          return_step=STEP.UMAP_TRAINED)
     else:
         parameter_dict["map"] = run_xmap(dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS,
-                                         seed=2, return_step=STEP.UMAP_TRAINED, learn_mode=LEARN.SUPERVISED)
+                                         seed=SEED, return_step=STEP.UMAP_TRAINED, learn_mode=LEARN.SUPERVISED)
 
     labels = parameter_dict["data"][parameter_dict["target_name"]].values
     colors = ['#2148bf', '#97151c', '#ffd6d6', '#faebeb', '#ffffff']
@@ -281,6 +307,9 @@ def update_map(size, opacity, mapmode):
             )
         }
 
+'''
+update selected UMAP embedding points with the selected dataset
+'''
 @app.callback(
     [
         Output('point-table', 'columns'),
@@ -305,6 +334,9 @@ def update_map_points(selected_points, page_current,page_size):
            parameter_dict["data"].iloc[selected_indices[page_current*page_size:(page_current+ 1)*page_size]].to_dict('records'), \
            style_data_conditional, "{} data points are selected. See the raw data in the table below (from {} to {}):".format(len(selected_indices), page_current*page_size, (page_current+ 1)*page_size)
 
+'''
+update discrptive statistic table with the selected dataset
+'''
 @app.callback(
     Output('datasum-table', 'children'),
     [Input('class-dropdown', 'value')])
@@ -343,6 +375,9 @@ def update_summary(value):
                                  style_data_conditional=conditions
                                  )
 
+'''
+update ATL topology with the selected dataset
+'''
 @app.callback(
     [Output('data-network', 'figure'), Output('data-network', 'selectedData')],
     [
@@ -356,6 +391,9 @@ def update_map_topo(plottype, size, opacity, mapmode):
     reload_data_objects(mapmode, plottype)
     return update_map_multi(plottype, size, opacity, mapmode, -1)
 
+'''
+update explainable contexts with the selected dataset
+'''
 @app.callback(
     [
         Output('explain-map', 'figure'),
@@ -432,6 +470,9 @@ def update_map_explain(plottype, size, opacity, mapmode, context):
 
     return map, spoints, notes
 
+'''
+update explainable context table with the selected dataset
+'''
 @app.callback(
     [
         Output('context-table', 'data'),
@@ -446,6 +487,9 @@ def update_context_table(page_current,page_size):
     return parameter_dict["context_table"].iloc[page_current*page_size:(page_current+ 1)*page_size].to_dict('records'), \
            "{} to {} from {} Active Features (Green is for True and Red is for False)".format(page_current*page_size, min((page_current+ 1)*page_size, len(parameter_dict["context_table"])), len(parameter_dict["context_table"]))
 
+'''
+general method to update visualisation of maps with the selected dataset
+'''
 def update_map_multi(plottype, size, opacity, mapmode, context):
     colors = 10 * ['#2148bf', '#17b35a', '#b3b315', '#0f0f02', '#3a0fba',
                    '#ba0fac', '#0eb3a5', '#b3660e', '#8db89a',
@@ -536,6 +580,9 @@ def update_map_multi(plottype, size, opacity, mapmode, context):
             )
         }, {'points': [], 'range': None}
 
+'''
+general method to visualise ATL network with the selected dataset
+'''
 @app.callback(
     [
         Output('node-table', 'columns'),
@@ -553,6 +600,9 @@ def update_map_multi(plottype, size, opacity, mapmode, context):
 def update_network_points(plottype, selected_points, page_current,page_size):
     return update_multi_points(plottype, selected_points, page_current, page_size)
 
+'''
+update visuals with selected representation etc. and the selected dataset
+'''
 @app.callback(
     [
         Output('data-explain-table', 'columns'),
@@ -569,6 +619,9 @@ def update_network_points(plottype, selected_points, page_current,page_size):
 def update_explain_points(plottype, selected_points, page_current,page_size):
     return update_multi_points(plottype, selected_points, page_current,page_size)
 
+'''
+update selected points from the visualisation
+'''
 def update_multi_points(plottype, selected_points, page_current,page_size):
     if plottype == "Network":
         labels = parameter_dict["network_cluster_names"]
@@ -623,6 +676,9 @@ def update_multi_points(plottype, selected_points, page_current,page_size):
                style_data_conditional, "{} data points are selected. See the raw data in the table below (from {} to {}):".format(
             len(selected_indices), page_current * page_size, (page_current + 1) * page_size)
 
+'''
+update the context dropdown box
+'''
 @app.callback(
     Output('context-select', 'children'),
     [
@@ -656,26 +712,28 @@ def update_context_dropdown(plottype, mapmode):
                             ),
         ]
 
-
+'''
+refresh parameters and switch XMAP configurations based on users' inputs
+'''
 def reload_data_objects(mapmode, plottype):
     if plottype == "Context":
         if mapmode == "Unsupervised":
             embeddings, nodes, connection, classes, nclusters, node_indices, indices, cluster_explainer_dict, xcluster_id_details, xfeaturenames \
-                = run_xmap(dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS, seed=2,
+                = run_xmap(dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS, seed=SEED,
                            return_step=STEP.CONTEXT_EXPLAINED)
         else:
             embeddings, nodes, connection, classes, nclusters, node_indices, indices, cluster_explainer_dict, xcluster_id_details, xfeaturenames \
                 = run_xmap(dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS,
-                           seed=2, return_step=STEP.CONTEXT_EXPLAINED, learn_mode=LEARN.SUPERVISED)
+                           seed=SEED, return_step=STEP.CONTEXT_EXPLAINED, learn_mode=LEARN.SUPERVISED)
     else:
         if mapmode == "Unsupervised":
             embeddings, nodes, connection, classes, nclusters, node_indices, indices = \
-                run_xmap(dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS, seed=2,
+                run_xmap(dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS, seed=SEED,
                          return_step=STEP.ATL_TRAINED)
         else:
             embeddings, nodes, connection, classes, nclusters, node_indices, indices = \
                 run_xmap(dataset=parameter_dict["dataname"], n_neighbors=NN, negative_sample_rate=NS,
-                         seed=2, return_step=STEP.ATL_TRAINED, learn_mode=LEARN.SUPERVISED)
+                         seed=SEED, return_step=STEP.ATL_TRAINED, learn_mode=LEARN.SUPERVISED)
     parameter_dict["map"] = embeddings
     parameter_dict["network_nodes"] = nodes
     parameter_dict["network_connection"] = connection
@@ -690,8 +748,9 @@ def reload_data_objects(mapmode, plottype):
         parameter_dict["context_data"] = pd.DataFrame(parameter_dict["context_vector"],
                                                       columns=["Context #" + str(c + 1) for c in
                                                                range(parameter_dict["network_ncluster"])])
-
-
+'''
+update data table with selected XMAP configurations
+'''
 @app.callback(
     [
         Output('raw-data-table', 'columns'),
@@ -724,6 +783,9 @@ def update_output(mapmode, figure): #
            [{"name": i, "id": i} for i in parameter_dict["context_data"].columns],\
            allcons[0], allcons[1]
 
+'''
+update data table with selected context
+'''
 @app.callback(
     [
         Output('raw-data-table', 'data'),
@@ -747,6 +809,9 @@ def update_table(page_current,page_size, figure, context, dat):
                parameter_dict["context_data"][filter].round(3).iloc[page_current * page_size:(page_current + 1) * page_size].to_dict('records')
     # return parameter_dict["data"].round(3).iloc[page_current*page_size:(page_current+ 1)*page_size].to_dict('records'), parameter_dict["context_data"].round(3).iloc[page_current*page_size:(page_current+ 1)*page_size].to_dict('records')
 
+'''
+update parameters for selected classifiers
+'''
 @app.callback(
     [
         Output('param1', 'min'),
@@ -783,6 +848,9 @@ def update_output(mlalg, fig):
                5, 200, 1, 10, {"showCurrentValue": True, "label": "Ensembles"}
     return 111, 222, 5, 33
 
+'''
+update the classifier outputs with selected classification algorithm
+'''
 @app.callback(
     [
         Output('ml-run-log', 'children'),
@@ -819,7 +887,7 @@ def runml(click, context, learnmode, mlalg, p1, p2, datmode):
             clf = LogisticRegression(random_state=0, penalty='l1', tol=p2, solver='liblinear', C=p1, max_iter=1000)
             X, Y, fnames = setup_training_set(mlalg, nameclf)
             # cv
-            acc, auc, _, _ = traing_and_get_measures(X, Y, clf, nfold)
+            acc, auc, _, _ = training_and_get_measures(X, Y, clf, nfold)
             clf.fit(X,Y)
             parameter_dict[nameclf] = (clf, auc, acc)
             # print(clf.coef_)
@@ -870,7 +938,7 @@ def runml(click, context, learnmode, mlalg, p1, p2, datmode):
             clf = KNeighborsClassifier(n_neighbors=3)
             X, Y, fnames = setup_training_set(mlalg, nameclf)
             # cv
-            acc, auc, _, _ = traing_and_get_measures(X, Y, clf, nfold)
+            acc, auc, _, _ = training_and_get_measures(X, Y, clf, nfold)
             clf.fit(X,Y)
             parameter_dict[nameclf] = (clf, auc, acc)
             return "Complete training `id:{}` -- Metric: `AUC={:.3f}`, `Accuracy={:.3f}`.".format(nameclf, auc, acc), \
@@ -890,7 +958,7 @@ def runml(click, context, learnmode, mlalg, p1, p2, datmode):
             clf = MLPClassifier(hidden_layer_sizes=(p2,), random_state=1, max_iter=p1, warm_start=True)
             X, Y, fnames = setup_training_set(mlalg, nameclf)
             # cv
-            acc, auc, _, _ = traing_and_get_measures(X, Y, clf, nfold)
+            acc, auc, _, _ = training_and_get_measures(X, Y, clf, nfold)
             clf.fit(X,Y)
             parameter_dict[nameclf] = (clf, auc, acc)
             return "Complete training `id:{}` -- Metric: `AUC={:.3f}`, `Accuracy={:.3f}`.".format(nameclf, auc, acc), \
@@ -910,7 +978,7 @@ def runml(click, context, learnmode, mlalg, p1, p2, datmode):
             clf = XGBClassifier(max_depth=p1, n_estimators=p2)
             X, Y, fnames = setup_training_set(mlalg, nameclf)
             # cv
-            acc, auc, _, _ = traing_and_get_measures(X, Y, clf, nfold)
+            acc, auc, _, _ = training_and_get_measures(X, Y, clf, nfold)
             clf.fit(X,Y)
             parameter_dict[nameclf] = (clf, auc, acc)
             return "Complete training `id:{}` -- Metric: `AUC={:.3f}`, `Accuracy={:.3f}`.".format(nameclf, auc, acc), \
@@ -935,7 +1003,7 @@ def runml(click, context, learnmode, mlalg, p1, p2, datmode):
                              feature_names=fnames, n_jobs=4,
                              random_state=1)
             # cv
-            acc, auc, _, _ = traing_and_get_measures(X, Y, clf, nfold)
+            acc, auc, _, _ = training_and_get_measures(X, Y, clf, nfold)
             clf.fit(X,Y)
             parameter_dict[nameclf] = (clf, auc, acc)
             return "Complete training `id:{}` -- Metric: `AUC={:.3f}`, `Accuracy={:.3f}`.".format(nameclf, auc, acc), \
@@ -946,8 +1014,10 @@ def runml(click, context, learnmode, mlalg, p1, p2, datmode):
                    build_dummy_chart([parameter_dict[nameclf][1], parameter_dict[nameclf][2]])
     return "Running ..."
 
-
-def traing_and_get_measures(X, Y, clf, nfold):
+'''
+train classifiers with selected features using stratified KFOLD
+'''
+def training_and_get_measures(X, Y, clf, nfold):
     kf = StratifiedKFold(n_splits=nfold, shuffle=True, random_state=100)
     scoring = ['roc_auc', 'accuracy']
     scores = cross_validate(clf, X, Y, scoring=scoring, cv=kf, return_train_score=False)
@@ -958,7 +1028,9 @@ def traing_and_get_measures(X, Y, clf, nfold):
     accstd = np.std(scores['test_accuracy'])
     return acc, auc, accstd, aucstd
 
-
+'''
+update data for training; with XMAP, context-based features will be added
+'''
 def setup_training_set(mlalg, nameclf):
     if "XMAP" in mlalg:
         if "Context" in mlalg:
@@ -976,13 +1048,13 @@ def setup_training_set(mlalg, nameclf):
     else:
         X = parameter_dict["data"].values[::, 1::]
         fnames = np.array(parameter_dict["data"].columns[1::])
-    # X = parameter_dict["context_vector"]
-    # fnames = np.array(list(parameter_dict["context_data"]))
     Y = parameter_dict["data"].values[::, 0]
     parameter_dict[nameclf + "final_feature_names"] = fnames
     return X, Y, fnames
 
-
+'''
+update feature contribution visualisation
+'''
 def build_effect_chart(coefs, fnames, neg, pos):
     print("Feature impact")
     # print("Positive weights")
@@ -1016,6 +1088,9 @@ def build_effect_chart(coefs, fnames, neg, pos):
         )
     }
 
+'''
+dummy charts
+'''
 def build_dummy_chart(measures):
     return {
         'data': [
@@ -1025,6 +1100,9 @@ def build_dummy_chart(measures):
         ],
     }
 
+'''
+run all experiments for testing purposes
+'''
 def runall(nfold):
     dats = datasets
     mlalg = "XMAP"
@@ -1051,7 +1129,7 @@ def runall(nfold):
         for data in dats:
             parameter_dict["dataname"] = data
             X_norm, Y, scaler, nfeatures, feature_names, target_name = run_xmap(dataset=data, n_neighbors=15,
-                                                                                negative_sample_rate=5, seed=2,
+                                                                                negative_sample_rate=5, seed=SEED,
                                                                                 return_step=STEP.DATA_CLEANED)
             feature_names_display = [ff.replace("ubar", "_").replace("dot", ".") for ff in feature_names]
             dd = pd.DataFrame(np.concatenate((Y, X_norm), axis=1), columns=[target_name] + feature_names_display)
@@ -1069,11 +1147,11 @@ def runall(nfold):
                     break
                 print(alg, data, parameterml)
                 X, Y, fnames = setup_training_set("", "")
-                acc, auc, accstd, aucstd = traing_and_get_measures(X, Y, algs[alg], nfold)
+                acc, auc, accstd, aucstd = training_and_get_measures(X, Y, algs[alg], nfold)
                 X, Y, fnames = setup_training_set("XMAP", "")
-                xmap_acc, xmap_auc, xmap_accstd, xmap_aucstd = traing_and_get_measures(X, Y, algs[alg], nfold)
+                xmap_acc, xmap_auc, xmap_accstd, xmap_aucstd = training_and_get_measures(X, Y, algs[alg], nfold)
                 X, Y, fnames = setup_training_set("XMAP Context", "")
-                layer_acc, layer_auc, layer_accstd, layer_aucstd = traing_and_get_measures(X, Y, algs[alg], nfold)
+                layer_acc, layer_auc, layer_accstd, layer_aucstd = training_and_get_measures(X, Y, algs[alg], nfold)
                 outdata.loc[len(outdata)] = [alg, data, parameterml if alg == "Logistic Regression" else "NA"
                     , auc, aucstd, acc, accstd,
                                              xmap_auc, xmap_aucstd, xmap_acc, xmap_accstd,

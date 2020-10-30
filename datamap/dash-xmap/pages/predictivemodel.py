@@ -172,8 +172,8 @@ def create_layout(app, params):
                             html.Br(),
                             html.Div(
                                 [
-                                    html.Button("Train  Model", id="runml-button",
-                                                style={'width': '22%', 'display': 'inline-block'}),
+                                    html.Button("Train/Refresh Model", id="runml-button",
+                                                style={'width': '30%', 'display': 'inline-block'}),
                                     dcc.RadioItems(
                                         id='data_select',
                                         options=[

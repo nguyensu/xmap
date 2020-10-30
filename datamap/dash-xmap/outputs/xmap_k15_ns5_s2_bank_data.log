@@ -1,3 +1,109 @@
 	Load cleaned data from models/xmap_k15_ns5_s2_bank_data.cleandata
 Learning UMAP ...
 	Load trained umap from models/xmap_k15_ns5_s2_bank_data.unsupervised_umap
+Learning topological relations and Determining contexts ....
+	Load trained umap from models/xmap_k15_ns5_s2_bank_data.unsupervised_soinn
+Explaining contexts ...
+Context #1
+	True Features
+		['cons_price_idx_geq_93_5', 'euribor3m_geq_100', 'euribor3m_geq_200', 'euribor3m_geq_300', 'nr_employed_gt_5100']
+	False Features
+	Numeric Features
+	--------------------
+Context #2
+	True Features
+		['cons_price_idx_geq_93_5', 'euribor3m_geq_100', 'euribor3m_geq_200', 'euribor3m_geq_300', 'nr_employed_gt_5100']
+	False Features
+	Numeric Features
+	--------------------
+Context #3
+	True Features
+		['emp_var_rate_lt_n1', 'nr_employed_lt_5100']
+	False Features
+		['euribor3m_geq_200', 'euribor3m_geq_300', 'euribor3m_geq_500']
+	Numeric Features
+	--------------------
+Context #4
+	True Features
+		['emp_var_rate_lt_n1', 'nr_employed_lt_5100']
+	False Features
+		['euribor3m_geq_200', 'euribor3m_geq_300', 'euribor3m_geq_500']
+	Numeric Features
+	--------------------
+Context #5
+	True Features
+		['call_in_Q3', 'emp_var_rate_gt_1', 'euribor3m_geq_100', 'euribor3m_geq_200', 'nr_employed_gt_5100']
+	False Features
+	Numeric Features
+	--------------------
+Context #6
+	True Features
+		['call_in_Q3', 'emp_var_rate_gt_1', 'euribor3m_geq_300', 'euribor3m_geq_400', 'nr_employed_gt_5100']
+	False Features
+	Numeric Features
+	--------------------
+Context #7
+	True Features
+		['cons_conf_idx_leq_n40', 'emp_var_rate_lt_n1', 'nr_employed_lt_5100', 'single']
+	False Features
+		['euribor3m_geq_500']
+	Numeric Features
+	--------------------
+Context #8
+	True Features
+		['emp_var_rate_lt_n1', 'nr_employed_lt_5100']
+	False Features
+		['euribor3m_geq_200', 'euribor3m_geq_300', 'euribor3m_geq_500']
+	Numeric Features
+	--------------------
+Context #9
+	True Features
+		['call_in_Q3', 'emp_var_rate_gt_1', 'euribor3m_geq_100', 'euribor3m_geq_200', 'nr_employed_gt_5100']
+	False Features
+	Numeric Features
+	--------------------
+Context #10
+	True Features
+		['cons_price_idx_geq_93_5', 'emp_var_rate_gt_1', 'euribor3m_geq_100', 'euribor3m_geq_200', 'nr_employed_gt_5100']
+	False Features
+	Numeric Features
+	--------------------
+Context #11
+	True Features
+		['cons_conf_idx_leq_n40', 'euribor3m_geq_100', 'euribor3m_geq_200', 'euribor3m_geq_300', 'nr_employed_gt_5100']
+	False Features
+	Numeric Features
+	--------------------
+Context #12
+	True Features
+		['cons_conf_idx_leq_n40', 'emp_var_rate_lt_n1', 'nr_employed_lt_5100']
+	False Features
+		['euribor3m_geq_300', 'euribor3m_geq_500']
+	Numeric Features
+	--------------------
+Context #13
+	True Features
+		['call_in_Q3', 'emp_var_rate_gt_1', 'euribor3m_geq_100', 'euribor3m_geq_200', 'nr_employed_gt_5100']
+	False Features
+	Numeric Features
+	--------------------
+Context #14
+	True Features
+		['called_landline', 'emp_var_rate_gt_1', 'euribor3m_geq_100', 'euribor3m_geq_200', 'nr_employed_gt_5100']
+	False Features
+	Numeric Features
+	--------------------
+Context #15
+	True Features
+		['called_landline', 'euribor3m_geq_100', 'euribor3m_geq_200', 'euribor3m_geq_300', 'nr_employed_gt_5100']
+	False Features
+	Numeric Features
+	--------------------
+Context #16
+	True Features
+		['call_on_tue', 'called_landline', 'cons_price_idx_geq_93_5', 'emp_var_rate_gt_1', 'nr_employed_gt_5100']
+	False Features
+	Numeric Features
+	--------------------
+	====================
+

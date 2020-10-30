@@ -1,1 +1,99 @@
 	Load cleaned data from models/xmap_k15_ns5_s2_adult_data.cleandata
+Learning UMAP ...
+	Load trained umap from models/xmap_k15_ns5_s2_adult_data.unsupervised_umap
+Learning topological relations and Determining contexts ....
+	Load trained umap from models/xmap_k15_ns5_s2_adult_data.unsupervised_soinn
+Explaining contexts ...
+Context #1
+	True Features
+		['Male']
+	False Features
+		['Female', 'JobArmedForces', 'WorkHrsPerWeek_geq_50']
+	Numeric Features
+	--------------------
+Context #2
+	True Features
+		['Female']
+	False Features
+		['JobAgriculture', 'JobArmedForces', 'Male', 'WorkHrsPerWeek_lt_40']
+	Numeric Features
+	--------------------
+Context #3
+	True Features
+	False Features
+		['JobArmedForces', 'Widowed', 'WorkHrsPerWeek_lt_40']
+	Numeric Features
+	--------------------
+Context #4
+	True Features
+	False Features
+		['Black', 'JobAgriculture', 'JobArmedForces', 'SelfEmployedInc', 'Widowed']
+	Numeric Features
+	--------------------
+Context #5
+	True Features
+	False Features
+		['JobAgriculture', 'JobArmedForces', 'OtherRace', 'SelfEmployedInc', 'SelfEmployedNotInc']
+	Numeric Features
+	--------------------
+Context #6
+	True Features
+		['Male']
+	False Features
+		['Female', 'JobArmedForces']
+	Numeric Features
+	--------------------
+Context #7
+	True Features
+		['Male']
+	False Features
+		['DivorcedOrSeparated', 'Female', 'JobArmedForces', 'Widowed']
+	Numeric Features
+	--------------------
+Context #8
+	True Features
+	False Features
+		['DivorcedOrSeparated', 'JobAgriculture', 'JobArmedForces', 'SelfEmployedInc', 'Widowed']
+	Numeric Features
+	--------------------
+Context #9
+	True Features
+		['White']
+	False Features
+		['Age_geq_60', 'EmployedInPublicSector', 'JobArmedForces', 'NoHS']
+	Numeric Features
+	--------------------
+Context #10
+	True Features
+	False Features
+		['JobAgriculture', 'JobArmedForces', 'SelfEmployedInc']
+	Numeric Features
+	--------------------
+Context #11
+	True Features
+		['Male']
+	False Features
+		['DivorcedOrSeparated', 'Female', 'JobArmedForces', 'Widowed']
+	Numeric Features
+	--------------------
+Context #12
+	True Features
+		['Female']
+	False Features
+		['JobAgriculture', 'JobArmedForces', 'Male', 'WorkHrsPerWeek_40_to_50']
+	Numeric Features
+	--------------------
+Context #13
+	True Features
+	False Features
+		['JobArmedForces']
+	Numeric Features
+	--------------------
+Context #14
+	True Features
+	False Features
+		['DivorcedOrSeparated', 'EmployedInPublicSector', 'JobArmedForces', 'JobManagerial', 'WorkHrsPerWeek_lt_40']
+	Numeric Features
+	--------------------
+	====================
+

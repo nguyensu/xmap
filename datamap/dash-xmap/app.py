@@ -1065,11 +1065,11 @@ def build_effect_chart(coefs, fnames, neg, pos):
         print(fnames[i], ",",  coefs[i])
     return {
         'data': [
-            go.Bar(x=fnames[pos], y=coefs[pos],
+            go.Bar(x=fnames[pos], y=np.exp(coefs[pos]),
                    marker_color='#97151c',
                    text=fnames[pos],
                    name='Increasing Risk', orientation='v'),
-            go.Bar(x=fnames[neg], y=coefs[neg],
+            go.Bar(x=fnames[neg], y=np.exp(coefs[neg]),
                    marker_color='#3D9970',
                    text=fnames[neg],
                    name='Decreasing Risk', orientation='v')

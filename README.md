@@ -38,3 +38,6 @@ XMAP has been tested on window 10 and ubuntu, with anaconda python 3.6
 
 ## Quick start
 run */datamap/dash-xmap/app.py*
+
+## Publication
+Nguyen, S., Tran, B. XMAP: eXplainable mapping analytical process. Complex Intell. Syst. (2021). https://doi.org/10.1007/s40747-021-00583-8
